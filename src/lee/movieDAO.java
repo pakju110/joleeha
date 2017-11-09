@@ -121,7 +121,7 @@ public class movieDAO {
 	public ArrayList<movieVO> search2(String genre, String genre2){
 		ArrayList<movieVO> res =new ArrayList<>();
 		try {
-			sql = "select * from movieinfo (where genre like ?) and ( where genre like ?)";
+			sql = "select * from movieinfo where ( genre like ?) and ( genre like ?)";
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, "%"+genre+"%");
 			stmt.setString(2, "%"+genre2+"%");

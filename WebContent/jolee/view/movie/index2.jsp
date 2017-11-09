@@ -25,7 +25,7 @@ request.setCharacterEncoding("euc-kr");
 %>
 <tr>
 		
-		<td><a href="detail.jsp?title=<%=vo.getMovietitle() %>"><%=vo.getMovietitle() %></a></td>
+		<td><a href="detail.jsp?title=<%=vo.getMovietitle().toLowerCase() %>"><%=vo.getMovietitle() %></a></td>
 		<td><%=vo.getGenre() %>
 		<td><%=vo.getStar() %> </td>
 		

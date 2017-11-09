@@ -6,7 +6,7 @@
 center/notice/list
 <%@ include file="../../inc/menuData.jsp" %>
 <%
-
-	request.setAttribute("data",  new movieDAO().detail2(request.getParameter("title")));
+	request.setCharacterEncoding("euc-kr");
+	request.setAttribute("data",  new movieDAO().detail2(request.getParameter("title").toLowerCase()));
 %>
 <jsp:forward page="../../view/template.jsp"></jsp:forward>

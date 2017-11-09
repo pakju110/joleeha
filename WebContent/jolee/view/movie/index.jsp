@@ -71,7 +71,7 @@ MemberVO res = (MemberVO)session.getAttribute("memlogin");
 	</tr>
 
 <%}
-	if(res != null && res.getGrade().equals("pro")){%>
+	if(res != null && res.getGrade().equals("admin")){%>
 	<tr >	
 		<td colspan="7" align="center" >
 			<a href="uploadmovieform.jsp">±Û¾²±â</a>

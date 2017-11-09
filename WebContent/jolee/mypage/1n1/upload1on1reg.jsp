@@ -8,7 +8,7 @@
 <%@ include file="../../inc/menuData.jsp"%>
 
 <%
-
+	
 	request.setCharacterEncoding("euc-kr");
 
 	OneonOneVO mem = new OneonOneVO();
