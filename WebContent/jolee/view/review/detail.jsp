@@ -21,14 +21,24 @@
 		<td><%=vo.getTitle() %></td>
 	</tr>
 	<tr>
+		<td>º°Á¡</td>
+		<td><%for(int i=0; i<vo.getStar();i++){%>¡Ú<%} %></td>
+	</tr>
+	<tr>
+		<td>ganre</td>
+		<td><%=vo.getGenre() %></td>
+	</tr>
+	<tr>
 		<td>id</td>
 		<td><%=vo.getId() %></td>
 	</tr>
 	<tr>
 		<td>content</td>
 		<td><%=vo.getContent() %>
+		<% if(vo.getOrifile() != null){ %>
 		<br/>
 		<a href="download.jsp?Sysfile=<%=vo.getSysfile() %>&Orifile=<%=vo.getOrifile() %>" ><%=vo.getOrifile() %></a><br/>
+		<%} %>
 		</td>
 	</tr>
 	<tr>

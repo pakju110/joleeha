@@ -24,8 +24,16 @@ String upfile = request.getRealPath("file");
 	ReviewVO re = new ReviewVO();
 	//임시 아이디 멤버 제작되면 넣을 예정
 	MemberVO vo = (MemberVO)session.getAttribute("memlogin");
+	String[] arraygenre = mm.getParameterValues("genre");
 
-	String genre = "코미디,액션";
+	String genre = "";
+
+	for (int i = 0; i < arraygenre.length; i++) {
+		genre += arraygenre[i];
+		if (i < arraygenre.length - 1)
+			genre += "/";
+	}
+	
 
 
 	re.setCate("first");
