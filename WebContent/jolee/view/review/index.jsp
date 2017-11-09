@@ -40,7 +40,8 @@ MemberVO res = (MemberVO)session.getAttribute("memlogin");
 	
 </table>
 
-	<%if(res != null && (res.getGrade().equals("pro") || res.getGrade().equals("admin"))){ %>
+	<%if(res != null && ((res.getGrade().equals("pro") || res.getGrade().equals("admin"))||
+			(res.getGrade().equals("user")&&a.equals("user")))){ %>
 <a href="writForm.jsp">±Û¾²±â</a>
 <%} %>
 <!-- MemberVO vo = (MemberVO)session.getAttribute("mem");

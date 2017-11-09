@@ -25,7 +25,10 @@
 	</tr>
 	<tr>
 		<td>content</td>
-		<td><%=vo.getContent() %></td>
+		<td><%=vo.getContent() %>
+		<br/>
+		<a href="download.jsp?Sysfile=<%=vo.getSysfile() %>&Orifile=<%=vo.getOrifile() %>" ><%=vo.getOrifile() %></a><br/>
+		</td>
 	</tr>
 	<tr>
 		<td colspan="2" align="right"><a href="delete.jsp?no=<%=vo.getNo() %>">ªË¡¶</a><a href="index.jsp">list</a></td>
