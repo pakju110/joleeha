@@ -19,7 +19,15 @@ String upfile = request.getRealPath("file");
 			upfile, 10 * 1024 * 1024,
 			"euc-kr",
 			new DefaultFileRenamePolicy()); 
+	String[] arraygenre = mm.getParameterValues("genre");
 
+	String genre = "";
+
+	for (int i = 0; i < arraygenre.length; i++) {
+		genre += arraygenre[i];
+		if (i < arraygenre.length - 1)
+			genre += "/";
+	}
 	//request.setCharacterEncoding("euc-kr");
 	ReviewVO re = new ReviewVO();
 	//임시 아이디 멤버 제작되면 넣을 예정
@@ -34,7 +42,7 @@ String upfile = request.getRealPath("file");
 	 re.setOrifile(mm.getOriginalFileName("pic"));
 	re.setSysfile(mm.getFilesystemName("pic")); 
 	re.setMovietitle(mm.getParameter("movie"));
-	//은주야 장르 넣어라 
+	re.setGenre(genre);
 	re.setStar(Double.parseDouble(mm.getParameter("star")));
 
 	ReviewDAO dao = new ReviewDAO();
