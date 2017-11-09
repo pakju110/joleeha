@@ -5,7 +5,7 @@
 center/notice/list
 <%@ include file="../../inc/menuData.jsp" %>
 <%
-request.setCharacterEncoding("euc-kr");
-request.setAttribute("data",  new NoticeDAO().detail(Integer.parseInt(request.getParameter("no"))));
+	request.setCharacterEncoding("euc-kr");
+	request.setAttribute("data",  new NoticeDAO().detail(Integer.parseInt(request.getParameter("no"))));
 %>
 <jsp:forward page="../../view/template.jsp"></jsp:forward>

@@ -6,7 +6,7 @@ center/notice/list
 <%@ include file="../../inc/menuData.jsp" %>
  
  <%
- 	request.setAttribute("data", new NoticeDAO().list());
+ 	request.setAttribute("data", new NoticeDAO().list((String)request.getAttribute("cate")));
  %>
  
 <jsp:forward page="../../view/template.jsp"></jsp:forward>

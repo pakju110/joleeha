@@ -13,4 +13,12 @@ public class MFile {
 		}
 	}
 
+	void fileDelete2(NoticeVO vo )
+	{
+		if(vo.sysfile!=null && !vo.sysfile.equals("")&& !vo.sysfile.equals("null"))
+		{
+			File ff = new File(vo.path+"\\"+vo.sysfile);
+			ff.delete();
+		}
+	}
 }

@@ -23,8 +23,8 @@
 			<tr>
 				<td >카테고리</td>
 				<td><select name="cate">
-						<option value="noti">공지사항</option>
-						<option value="event">이벤트</option>
+						<option value="first">공지사항</option>
+						<option value="event">할인정보</option>
 					</optgroup>
 				</select></td>
 				</td>
