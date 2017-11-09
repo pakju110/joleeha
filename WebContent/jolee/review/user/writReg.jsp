@@ -1,3 +1,4 @@
+<%@page import="req1.MemberVO"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="java.util.Date"%>
@@ -22,15 +23,14 @@ String upfile = request.getRealPath("file");
 	//request.setCharacterEncoding("euc-kr");
 	ReviewVO re = new ReviewVO();
 	//임시 아이디 멤버 제작되면 넣을 예정
-	session.setAttribute("mem", "ss");
-	String id = (String)session.getAttribute("mem");
+	MemberVO vo = (MemberVO)session.getAttribute("memlogin");
 
 
 	String genre = "코미디,액션";
 
 
 	re.setCate("user");
-	re.setId(id);
+	re.setId(vo.getId());
 	
 	re.setTitle(mm.getParameter("title"));
 	re.setContent(mm.getParameter("content"));
