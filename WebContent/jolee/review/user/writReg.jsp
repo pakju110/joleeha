@@ -26,9 +26,6 @@ String upfile = request.getRealPath("file");
 	MemberVO vo = (MemberVO)session.getAttribute("memlogin");
 
 
-	String genre = "코미디,액션";
-
-
 	re.setCate("user");
 	re.setId(vo.getId());
 	
@@ -37,7 +34,7 @@ String upfile = request.getRealPath("file");
 	 re.setOrifile(mm.getOriginalFileName("pic"));
 	re.setSysfile(mm.getFilesystemName("pic")); 
 	re.setMovietitle(mm.getParameter("movie"));
-	re.setGenre(genre);
+	//은주야 장르 넣어라 
 	re.setStar(Double.parseDouble(mm.getParameter("star")));
 
 	ReviewDAO dao = new ReviewDAO();

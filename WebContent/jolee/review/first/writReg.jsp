@@ -23,7 +23,6 @@ String upfile = request.getRealPath("file");
 	//request.setCharacterEncoding("euc-kr");
 	ReviewVO re = new ReviewVO();
 	//임시 아이디 멤버 제작되면 넣을 예정
-	session.setAttribute("mem", "cc");
 	MemberVO vo = (MemberVO)session.getAttribute("memlogin");
 
 	String genre = "코미디,액션";
