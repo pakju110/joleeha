@@ -1,0 +1,99 @@
+문제1)
+회원 테이블 인스턴스를 참고하여 테이블을 생성하시오.
+
+회원[:MEMBER]테이블 인스턴스(크기는 임의로)
+
+create table member ( userid varchar2(16), username varchar2(6),
+passwd varchar2(16), idnum varchar2(16), phone varchar2(20),
+address varchar2(30), regdate datE, interest varchar2(10));
+
+comment on column member.userid
+is '사용자아이디';
+comment on column member.username
+is '사용자이름';
+comment on column member.passwd
+is '비밀번호';
+comment on column member.idnum
+is '주민등록번호';
+comment on column member.phone
+is '전화번호';
+comment on column member.address
+is '주소';
+comment on column member.regdate
+is '가입일';
+comment on column member.interest
+is '관심분야';
+
+select * from user_col_comments
+where table_name = 'MEMBER';
+
+문제2) 
+회원 테이블에 회원 정보를 입력하시오.
+--(sunshinlee, 이순신, ss1000,8701011112020,02)333-2123, SYSDATE,컴퓨터)
+
+SELECT * FROM MEMBER;
+
+INSERT INTO MEMBER 
+VALUES('sunshinlee', '이순신',
+'ss1000','8701011112020','02)333-2123','',SYSDATE,'컴퓨터');
+
+문제3)회원 테이블의 구조와 데이터가 같은 MEMBER_SECOND 테이블을 만드시오.
+
+CREATE TABLE MEMBER_SECOND(userid, username,
+passwd, idnum, phone,
+address, regdate, interest)
+AS SELECT * FROM MEMBER;
+
+SELECT * FROM MEMBER_SECOND;
+
+문제4) 회원 테이블의 USERID, USERNAME, PASSWD 칼럼만 복사하여 MEMBER_THIRD
+테이블을 만드시오
+
+CREATE TABLE MEMBER_THIRD
+AS SELECT USERID,USERNAME,PASSWD FROM MEMBER;
+
+SELECT * FROM MEMBER_THIRD;
+
+문제5) 회원 테이블의 구조는 동일하고 데이트를 가지지 않는 MEMBER_FORTH테이블을
+만드시오
+
+CREATE TABLE MEMBER_FORTH
+AS SELECT * FROM MEMBER
+WHERE 1=2;
+
+DESC MEMBER_FORTH;
+
+문제6) 회원 테이블에 EMAIL 칼럼을 추가하시오(EMAIL 칼럼의 데이터타입은 VARCHAR2(50))
+
+ALTER TABLE MEMBER
+ADD (EMAIL VARCHAR2(50));
+
+DESC MEMBER;
+
+문제7) 회원 테이블에 국적을 나타내는 COUNTRY 칼럼을 추가하고, 기본값을 'KOREA'로
+지정하시오
+
+ALTER TABLE MEMBER
+ADD ( COUNTRY VARCHAR2(20) DEFAULT 'KOREA');
+
+DESC MEMBER;
+
+문제8) 회원 테이블에서 EMAIL 칼럼을 삭제하시오
+
+ALTER TABLE MEMBER
+DROP COLUMN EMAIL;
+
+SELECT * FROM MEMBER;
+
+문제9) 회원 테이블의 ADDRESS 칼럼의 데이터 크기를 30으로 늘리시오
+
+ALTER TABLE MEMBER
+MODIFY ADDRESS VARCHAR2(30);
+
+DESC MEMBER;
+
+문제10) MEMBER_SECOND의 테이블 이름을 EDIT_MEMBER로 변경하시오
+
+RENAME MEMBER_SECOND TO EDIT_MEMBER;
+
+SELECT * FROM TAB;

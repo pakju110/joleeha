@@ -1,0 +1,9 @@
+
+<%@page import="movie.ReviewDAO"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+¸®ºä
+<%@ include file="../../inc/menuData.jsp" %>
+
+<jsp:forward page="../../view/template.jsp"></jsp:forward>
+  
