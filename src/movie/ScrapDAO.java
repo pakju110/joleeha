@@ -87,17 +87,18 @@ public class ScrapDAO {
 		}
 	}
 	
-	public boolean delete(String cate,int no)
+	public boolean delete(String id,String cate,int no)
 	{
 		boolean res = false;
 		try {
 			
-			sql = "delete from MOVIESCRAP where cate= ? and no= ?" ;
+			sql = "delete from MOVIESCRAP where cate= ? and no= ? and id = ?" ;
 
 			stmt = con.prepareStatement(sql);
 			// stmt.setString(1, res.getCate());
 			stmt.setString(1, cate);
 			stmt.setInt(2, no);
+			stmt.setString(3, id);
 			rs = stmt.executeQuery();
 
 		} catch (Exception e) {
