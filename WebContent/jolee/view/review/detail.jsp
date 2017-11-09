@@ -45,7 +45,7 @@
 		
 		<%if( vo2 != null && vo2.getId().equals(vo.getId())){ %>
 		<td colspan="2" align="right">
-			<a href="delete.jsp?no=<%=vo.getNo() %>">삭제</a><a href="index.jsp">list</a>
+			<a href="delcheck.jsp?no=<%=vo.getNo() %>">삭제</a><a href="index.jsp">list</a>
 		</td>
 		<%} %>
 	</tr>
