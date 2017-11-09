@@ -40,14 +40,11 @@
 		<%} %>
 	</tr>
 </table>
-<%if( vo2 != null){
-	ComentDAO cmt = new ComentDAO();
 
-
-	%>
 <div class="bx_cmt">
 
-	<%
+	<%ComentDAO cmt = new ComentDAO();
+
 		for (ComentVO cvo : cmt.list(cate, no)) {
 			%>
 			<div class="cmt">
@@ -60,7 +57,7 @@
 			</div>
 			
 			<%
-		}
+		}if( vo2 != null){
 	%>
 
 	<form action="commentReg.jsp" method="post">
@@ -72,7 +69,8 @@
 		</div>
 	</form>
 	<a href="scrap.jsp?cate=<%=vo.getCate()%>&no=<%=vo.getNo()%>">½ºÅ©·¦</a>
-</div>
-<%
+	<%
 }
 %>
+	
+</div>
