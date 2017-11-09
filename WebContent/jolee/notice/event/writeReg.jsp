@@ -11,8 +11,8 @@
 <%
 
 
-	String upfile = request.getRealPath("pic");
-	upfile = "C:\\king\\joleerealmovie\\WebContent\\jolee\\pic";
+	String upfile = request.getRealPath("file");
+	upfile = "C:\\joleeha\\WebContent\\jolee\\file\\";
 	MultipartRequest mm = new MultipartRequest(
 			request,
 			upfile,
@@ -20,22 +20,19 @@
 			"euc-kr",
 			new DefaultFileRenamePolicy()
 			);
-
+	request.setCharacterEncoding("euc-kr");
 	
-	String email = mm.getParameter("email1")+
-			"@"+mm.getParameter("email2");
+	NoticeVO vo = new NoticeVO();
 	
-	NoticeVO noti = new NoticeVO();
-	
-	noti.setCate(mm.getParameter("cate"));
-	noti.setTitle(mm.getParameter("title"));
-	noti.setSysfile(mm.getFilesystemName("orifile"));
-	noti.setOrifile(mm.getOriginalFileName("orifile"));
-	noti.setContent(mm.getParameter("content"));
+	vo.setCate(mm.getParameter("cate"));
+	vo.setTitle(mm.getParameter("title"));
+	vo.setSysfile(mm.getFilesystemName("orifile"));
+	vo.setOrifile(mm.getOriginalFileName("orifile"));
+	vo.setContent(mm.getParameter("content"));
 	
 	
 	NoticeDAO dao = new NoticeDAO();
-	dao.insert(noti);
+	dao.insert(vo);
 	
 	%>      
 <jsp:forward page="../../view/template.jsp"></jsp:forward>

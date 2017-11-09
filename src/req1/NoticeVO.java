@@ -8,7 +8,16 @@ public class NoticeVO {
 
 	
 	Integer no;
-	String id, pw, title, content, cate, orifile, sysfile;
+	String id, pw, title, content, cate, orifile, sysfile, path;
+	Date  regDate;
+	
+	public Integer getNo() {
+		return no;
+	}
+	public void setNo(Integer no) {
+		this.no = no;
+	}
+
 	
 	public String getId() {
 		return id;
@@ -25,9 +34,6 @@ public class NoticeVO {
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-
-	Date  regDate;
-	
 	
 	
 	public String getOrifile() {
@@ -46,7 +52,16 @@ public class NoticeVO {
 		this.sysfile = sysfile;
 	}
 
-	
+
+	public String getPath() {
+		return path;
+	}
+
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
 	
 	
 	public String getCate() {
@@ -91,15 +106,6 @@ public class NoticeVO {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-
-	
-	public Integer getNo() {
-		return no;
-	}
-	public void setNo(Integer no) {
-		this.no = no;
-	}
-
 
 
 	public String getContent() {

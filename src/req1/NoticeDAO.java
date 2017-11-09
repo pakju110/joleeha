@@ -34,14 +34,15 @@ public class NoticeDAO {
 		}		
 	}
 	
-	public ArrayList<NoticeVO> list()
+	public ArrayList<NoticeVO> list(String cate)
 	{
 		ArrayList<NoticeVO> res =new ArrayList<>();
 
 		try {
-			sql = "select * from movienotice order by regdate desc";
-			
+			sql = "select * from movienotice where cate = ? order by regdate desc";
+			System.out.println(cate);
 			stmt = con.prepareStatement(sql);
+			stmt.setString(1, cate);
 			rs = stmt.executeQuery();
 			
 			while(rs.next())
@@ -83,6 +84,7 @@ public class NoticeDAO {
 				res = new NoticeVO();
 				
 				res.setNo(rs.getInt("no"));
+				res.setCate(rs.getString("cate"));
 				res.setTitle(rs.getString("title"));
 				res.setSysfile(rs.getString("sysfile"));
 				res.setOrifile(rs.getString("orifile"));
@@ -99,7 +101,7 @@ public class NoticeDAO {
 		return res;
 	}
 	
-	public void insert(NoticeVO mem )
+	public void insert(NoticeVO vo )
 	{
 		try {
 			
@@ -110,35 +112,35 @@ public class NoticeDAO {
 			rs = stmt.executeQuery();
 			
 			if(rs.next())
-				mem.setNo(rs.getInt(1));
+				vo.setNo(rs.getInt(1));
 			
 			
-			sql = "insert into movienotice (cate, no, title, orifile, sysfile"
+			sql = "insert into movienotice (cate, no, title, "
+					+" orifile, sysfile,"
 					+ "content,  regdate) values ("
 					+ "?,?,?,?,?,?,sysdate)";
 			
 			System.out.println(sql);
 			
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1, mem.getCate());
-			stmt.setInt(2, mem.getNo());
-			stmt.setString(3, mem.getTitle());
-			stmt.setString(4, mem.getOrifile());
-			stmt.setString(5, mem.getSysfile());
-			stmt.setString(6, mem.getContent());
+			stmt.setString(1, vo.getCate());
+			stmt.setInt(2, vo.getNo());
+			stmt.setString(3, vo.getTitle());
+			stmt.setString(4, vo.getOrifile());
+			stmt.setString(5, vo.getSysfile());
+			stmt.setString(6, vo.getContent());
 			
 			
 			System.out.println(stmt.executeUpdate());
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			close();
 		}
 	}
 	
-	public boolean delete(Integer no)
+	public boolean delete(int no)
 	{
 		boolean res = false;
 		try {
@@ -159,26 +161,36 @@ public class NoticeDAO {
 	}
 	
 	
-	/*
-	public boolean modify(NoticeVO mem )
+	
+	public boolean modify(NoticeVO vo )
 	{
 		boolean res = false;
 		try {
-			
-			
-			sql = "update notice set  title = ?, content = ?"
-				+ " where id=? and pw = ?";
+			sql = "select * from movievober where no=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, vo.getNo());
+			rs = stmt.executeQuery();
+			if (rs.next())
+				vo.setSysfile(rs.getString("sysfile"));
+
+			//
+			sql = "update notice set  cate = ?, title = ?,"
+				+ "orifile = ?, sysfile = ?, content = ?"
+				+ " where no = ?";
 		
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1,mem.getTitle() );
-			
-			stmt.setString(2, mem.getContent());
-			stmt.setInt(3, mem.getId());
-			stmt.setString(4, mem.getPw());
+			stmt.setString(1, vo.getCate());
+			stmt.setString(2, vo.getTitle());
+			stmt.setString(3, vo.getOrifile());
+			stmt.setString(4, vo.getSysfile());
+			stmt.setString(5, vo.getContent());
+			stmt.setInt(6, vo.getNo());
 			
 			System.out.println(sql);
-			if(stmt.executeUpdate()>0)
+			if (stmt.executeUpdate() > 0) {
 				res = true;
+				new MFile().fileDelete2(vo);
+			}
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -188,7 +200,7 @@ public class NoticeDAO {
 		}
 		return res;
 	}
-	*/
+	
 	
 	
 	

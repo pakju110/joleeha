@@ -25,8 +25,8 @@
 		<tr>
 			<td>ÆÄÀÏ</td>
 			<td>
-				<%-- <img alt="" src="../pic/<%=vo.getOrifile() %>"> --%>
-				<img alt="" src="../pic/<%=vo.getSysfile() %>">
+				<%-- <img alt=""src="C:/file/<%=vo.getOrifile() %>"> --%>
+				<img src="../../file/<%=vo.getSysfile() %>">
 			</td>
 		</tr>
 		<tr>

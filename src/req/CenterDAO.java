@@ -136,7 +136,7 @@ public class CenterDAO {
 			stmt.setString(2, mem.getPw());
 			stmt.setString(3, mem.getTitle());
 			stmt.setString(4, mem.getContent());
-			stmt.setString(4, mem.getCate());
+			stmt.setString(5, mem.getCate());
 			
 			
 			System.out.println(stmt.executeUpdate());
@@ -155,7 +155,7 @@ public class CenterDAO {
 		boolean res = false;
 		try {
 			
-			sql = "delete from center where id= ?  and pw = ?";
+			sql = "delete from center where no = ?";
 		
 			stmt= con.prepareStatement(sql);
 			
