@@ -56,6 +56,34 @@ public class MemberDAO {
 
 		return res;
 	}
+	public ArrayList<MemberVO> gradelist() {
+		ArrayList<MemberVO> res = new ArrayList<>();
+		
+		try {
+			sql = "select * from moviemember order by grade";
+			
+			stmt = con.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				MemberVO vo = new MemberVO();
+				
+				vo.setId(rs.getString("id"));
+				vo.setName(rs.getString("name"));
+				vo.setNick(rs.getString("nick"));
+				vo.setPhone(rs.getString("phone"));
+				vo.setEmail(rs.getString("email"));
+				vo.setGenre(rs.getString("genre"));
+				vo.setGrade(rs.getString("grade"));
+				res.add(vo);
+			}
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}return res;
+	}
 
 	public MemberVO detail(String id) {
 		MemberVO res = null;
@@ -208,6 +236,26 @@ public class MemberDAO {
 		return res;
 	}
 
+	public boolean changegrade(String id, String grade) {
+		boolean res= false;
+		try {
+			sql = "update moviemember set grade = ? where id= ?";
+			
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, grade);
+			stmt.setString(2, id);
+			
+			if(stmt.executeUpdate()>0)
+				res = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return res;
+	}
+	
 	public boolean modify(MemberVO mem) {
 		boolean res = false;
 		try {
