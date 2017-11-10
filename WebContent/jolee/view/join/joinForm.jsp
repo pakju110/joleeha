@@ -1,5 +1,17 @@
+<%@page import="req1.MemberVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="req1.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<% 
+
+	MemberDAO dao = new MemberDAO();
+	String id="";
+	
+	if(request.getParameter("id")!=null)
+	id = request.getParameter("id");	
+
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,20 +23,24 @@
 	height:30px;
 	border-radius:15px; 
 }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> branch 'master' of https://github.com/cuzimissu/joleerealmovie.git
 </style>
+<script type="text/javascript">
+   function idCheck() {
+	  
+	   jf.action="idReg.jsp";
+	   jf.submit();
+    }
+</script>
 </head>
 <body>
-<form action="joinReg.jsp" method="post">
+<form name="jf"  action="joinReg.jsp" method="post">
 	<table border=1>
 		<tr>
 			<td>아이디</td>
-			<td><input type="text" name="id" size="10" maxlength="8" />
-			<input type="button" name="sch" class="sch" value="id중복확인"/>
+			<td><input type="text" name="id" id="id" size="10" maxlength="8" value="<%=id %>" />
+			<input type="button" onclick="idCheck()" name="sch" class="sch" value="id중복확인"/>
 			</td>
 		</tr>
 		<tr>
