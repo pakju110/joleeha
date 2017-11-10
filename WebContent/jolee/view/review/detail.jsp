@@ -65,7 +65,7 @@
 				<div><%=cvo.getId() %></div>
 				<div><%=cvo.getContent() %></div>
 				<p><%=cvo.getRegDate()%>
-				<%if( vo2 != null && vo2.getId().equals(cvo.getId())){ %>
+				<%if( vo2 != null && (vo2.getId().equals(cvo.getId())||vo2.getGrade().equals("admin"))){ %>
 				<a href="deletecmt.jsp?cno=<%=cvo.getCno()%>&no=<%=cvo.getNo()%>">ªË¡¶</a>
 				<%} %></p>
 			</div>

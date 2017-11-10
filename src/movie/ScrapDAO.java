@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
-
 public class ScrapDAO {
 
 	String url = "localhost:1521:xe";
@@ -62,13 +60,41 @@ public class ScrapDAO {
 		return res;
 	}
 
-	
+	public ScrapVO detail(String id, String cate, int no) {
+		ScrapVO res = null;
 
+		try {
+			sql = "select * from MOVIESCRAP where cate= ? and no= ? and id = ?";
+
+			stmt = con.prepareStatement(sql);
+			// stmt.setString(1, res.getCate());
+			stmt.setString(1, cate);
+			stmt.setInt(2, no);
+			stmt.setString(3, id);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				res = new ScrapVO();
+
+				res.setRegDate(rs.getTimestamp("regdate"));
+				res.setCate(rs.getString("cate"));
+				res.setNo(rs.getInt("no"));
+				res.setId(rs.getString("id"));
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+		return res;
+	}
 
 	public void insert(ScrapVO re) {
 		try {
-			sql = "insert into MOVIESCRAP (cate, no, id, regdate) values (" 
-					+ "?,?,?,sysdate)";
+			sql = "insert into MOVIESCRAP (cate, no, id, regdate) values (" + "?,?,?,sysdate)";
 			System.out.println(sql);
 
 			stmt = con.prepareStatement(sql);
@@ -86,13 +112,12 @@ public class ScrapDAO {
 			close();
 		}
 	}
-	
-	public boolean delete(String id,String cate,int no)
-	{
+
+	public boolean delete(String id, String cate, int no) {
 		boolean res = false;
 		try {
-			
-			sql = "delete from MOVIESCRAP where cate= ? and no= ? and id = ?" ;
+
+			sql = "delete from MOVIESCRAP where cate= ? and no= ? and id = ?";
 
 			stmt = con.prepareStatement(sql);
 			// stmt.setString(1, res.getCate());
@@ -100,15 +125,18 @@ public class ScrapDAO {
 			stmt.setInt(2, no);
 			stmt.setString(3, id);
 			rs = stmt.executeQuery();
+			if (stmt.executeUpdate() > 0)
+				res = true;
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close();
 		}
 		return res;
 	}
+
 	public void close() {
 		try {
 			if (rs != null)
