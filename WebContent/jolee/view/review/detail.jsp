@@ -1,3 +1,5 @@
+<%@page import="movie.ScrapDAO"%>
+<%@page import="movie.ScrapVO"%>
 <%@page import="req1.MemberVO"%>
 <%@page import="movie.ComentVO"%>
 <%@page import="movie.ComentDAO"%>
@@ -9,12 +11,14 @@
 <%
 	
 	ReviewVO vo = (ReviewVO)request.getAttribute("data");
+	
 	MemberVO vo2 = (MemberVO)session.getAttribute("memlogin");
 	int no = Integer.parseInt((String)session.getAttribute("no"));
 	String cate = (String)session.getAttribute("cate");
 	request.setCharacterEncoding("euc-kr");
+	ScrapVO scvo = new ScrapDAO().detail(vo2.getId(),cate,Integer.parseInt(request.getParameter("no")));
 %>
-<%=(String)session.getAttribute("cate") %>
+
 <table border="">
 	<tr>
 		<td>title</td>
@@ -78,8 +82,13 @@
 			<input type="submit" value="¥Ò±€æ≤±‚">
 		</div>
 	</form>
+	<%if(scvo == null ||scvo.getId() == null){  %>
 	<a href="scrap.jsp?cate=<%=vo.getCate()%>&no=<%=vo.getNo()%>">Ω∫≈©∑¶</a>
-	<%
+	
+	<%}else{
+		
+		%><a href="delscrap.jsp?cate=<%=vo.getCate()%>&no=<%=vo.getNo()%>">Ω∫≈©∑¶√Îº“</a><%
+	}
 }
 %>
 	

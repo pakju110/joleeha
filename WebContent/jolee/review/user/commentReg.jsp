@@ -8,18 +8,18 @@
 리뷰
 <%@ include file="../../inc/menuData.jsp" %>
 <%
+
 	request.setCharacterEncoding("euc-kr");
 	ComentVO re2 = new ComentVO();
-	//임시 아이디 멤버 제작되면 넣을 예정
 	MemberVO vo3 = (MemberVO)session.getAttribute("memlogin");
-
 	String cate2 = (String)request.getAttribute("cate");
 	int no =Integer.parseInt((String)session.getAttribute("no"));
 
 	re2.setCate(cate2);
-	//re.setCate("first");
+
 	re2.setNo(no);
 	re2.setId(vo3.getId());
+	System.out.println("coment="+request.getParameter("content"));
 	re2.setContent(request.getParameter("content"));
 	
 

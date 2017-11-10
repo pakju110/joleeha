@@ -5,6 +5,7 @@
 ¸®ºä
 <%@ include file="../../inc/menuData.jsp" %>
 <%
+	
 	System.out.println(request.getAttribute("cate"));
 	ReviewVO vo = new ReviewVO();
 	vo.setCate((String)request.getAttribute("cate"));
