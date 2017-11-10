@@ -1,15 +1,19 @@
+<%@page import="req1.MemberVO"%>
 <%@page import="req1.NoticeVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 
-<%=request.getAttribute("serviceUrl") %>view ÆäÀÌÁö
-
+<%=request.getAttribute("serviceUrl") %>view íŽ˜ì´ì§€
+<%
+MemberVO res = (MemberVO)session.getAttribute("memlogin");
+String a = (String)request.getAttribute("cate");
+%>
 <table border="">
 	<tr>
 		<td>no</td>
-		<td>Á¦¸ñ</td>
-		<td>ÀÛ¼ºÀÏ</td>
+		<td>ì œëª©</td>
+		<td>ìž‘ì„±ì¼</td>
 	</tr>
 
 
@@ -23,12 +27,14 @@
 		<td><a href="writeDetail.jsp?no=<%=vo.getNo() %>"><%=vo.getTitle() %></a></td>
 		<td><%=vo.strRegDate() %> </td>
 	</tr>
-	<%} %>	
+	<%}
 
-	<tr>
+	if(res != null &&res.getGrade().equals("admin")&&a.equals("first")){
+%>	
+<tr>
 		<td colspan="3" align="right">
-			<a href="writeForm.jsp">±Û¾²±â</a>
+			<a href="writeForm.jsp">ê¸€ì“°ê¸°</a>
 		</td>
 	</tr>
-
+<%} %>
 </table>
