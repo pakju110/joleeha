@@ -33,13 +33,18 @@
 		<td>성별</td><td><%=vo.getGender() %></td>
 	</tr><tr>
 		<td>회원등급</td><td><%=vo.getGrade() %></td>
-		
-	</tr><tr>
+	</tr>
+	
+	<% if(vo.getSysfile()!=null && (vo.getGrade().equals("pro") || vo.getGrade().equals("admin"))) { %>
+	<tr>
 		<td>첨부파일</td>
 		<td><%=vo.getSysfile() %>
 		<a href="download.jsp?sys=<%=vo.getSysfile() %>&ori=<%=vo.getOrifile() %>"><%=vo.getOrifile() %></a>
 		</td>
-	</tr><tr>
+	</tr> 
+	<% } %>
+	
+	<tr>
 			<td>관심장르</td><td><%=vo.getGenre() %></td>
 	</tr><tr>
 	<tr>

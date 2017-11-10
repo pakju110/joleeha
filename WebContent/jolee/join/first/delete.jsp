@@ -13,14 +13,16 @@
 	
 	
 	String msg = "pw가 일치하지 않습니다.";
-	String url = "detail.jsp?id="+mem.getId();
+	String url = "joinDetail.jsp?id="+mem.getId();
+	
 	if(new MemberDAO().delete(mem))
 	{
 		msg = "탈퇴되었습니다";
-		url = "memList.jsp";
+		url = "index.jsp";
 	}
-	
-	
 
+	request.setAttribute("msg", msg);
+	request.setAttribute("url", url);
+	
 %>
 <jsp:forward page="../../view/template.jsp"></jsp:forward>

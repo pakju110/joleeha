@@ -56,6 +56,24 @@ public class MemberDAO {
 
 		return res;
 	}
+	
+	public boolean idCheck(String i)
+	{
+		boolean res = false;
+		try {
+			sql = "select * from moviemember where id = ?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, i);
+			
+			rs = stmt.executeQuery();
+			if(rs.next())
+				res = true;
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}return res;
+	}
+	
 	public ArrayList<MemberVO> gradelist() {
 		ArrayList<MemberVO> res = new ArrayList<>();
 		
@@ -275,31 +293,39 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public boolean modify(MemberVO mem) {
+	public boolean modify(MemberVO mem )
+	{
 		boolean res = false;
 		try {
-
-			sql = "update moviemember set  gender = ?," + "Phone = ?, email = ?, pw = ?" + " where id = ? and pw = ?";
-
+			
+			sql = "update moviemember set  nick = ?,"
+				+"Phone = ?, email = ?,  genre = ?,sysfile = ?,orifile = ? "
+				+ " where id = ? and pw = ?";
+		
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1, mem.getGender());
+			stmt.setString(1, mem.getNick());
 			stmt.setString(2, mem.getPhone());
 			stmt.setString(3, mem.getEmail());
-			stmt.setString(4, mem.getPw());
-
+			stmt.setString(4, mem.getGenre());
+			stmt.setString(5, mem.getSysfile());
+			stmt.setString(6, mem.getOrifile());
+			stmt.setString(7, mem.getId());
+			stmt.setString(8, mem.getPw());
+			
+			
+			
 			System.out.println(sql);
-			if (stmt.executeUpdate() > 0)
+			if(stmt.executeUpdate()>0)
 				res = true;
-
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
+		}finally {
 			close();
 		}
 		return res;
 	}
-
 
 	public ArrayList<MemberVO> applylist() {
 		ArrayList<MemberVO> res = new ArrayList<>();

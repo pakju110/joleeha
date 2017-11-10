@@ -35,7 +35,7 @@ center/notice/list
 			"@"+request.getParameter("email2");
 	
 	MemberVO mem = new MemberVO();
-	
+		
 	mem.setId(request.getParameter("id"));
 	mem.setPw(request.getParameter("pw"));
 	mem.setName(request.getParameter("name"));
@@ -44,18 +44,30 @@ center/notice/list
 	mem.setPhone(request.getParameter("phone"));
 	mem.setGrade("user");
 	mem.setGenre(request.getParameter("genre"));
-/* 	mem.setSysfile(request.getFilesystemName("file"));
-	mem.setOrifile(request.getOriginalFileName("file"));
-	 */
-	 
-	 
-	
-	
 	mem.setEmail(email);
 	
 	MemberDAO dao = new MemberDAO();
-	dao.insert(mem);
+	String msg = "";
+	String url = "joinForm.jsp?id="+mem.getId();
+	
+
+	if(!mem.getPw().equals(request.getParameter("pwc"))){
+		msg = "비밀번호가 일치하지 않거나 입력되지 않았습니다.";
+	}
+	else //if(new MemberDAO().insert(mem))
+	{
+		
+		dao.insert(mem);
+		msg = "회원가입이 완료되었습니다.";
+		url = "joinDetail.jsp?id="+mem.getId();
+	
+	}	
+	// 비밀번호 같은 것으로 입력해도 안들어감 
+	request.setAttribute("msg", msg);
+	request.setAttribute("url", url);
+
 	
 	%>
  
 <jsp:forward page="../../view/template.jsp"></jsp:forward>
+
