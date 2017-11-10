@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,p,button,table,th,td{margin:0;padding:0;}
+body,div,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,p,th,td,input,textarea,select,button{font-family:"Times New Roman", Times, serif; font-size:12px; color:#808080;}
+textarea { width:100%;}
+a, select,input,img, button {vertical-align:middle;}
+ul, ol {list-style-type:none; }
+.hide,legend,hr,caption span {position:absolute; left:-3000%;}
+em, address { font-style:normal;}
+table { border-collapse:collapse; border-spacing:0; width:100%;}
+a { color:#666; text-decoration:none;}
+a:focus,
+a:hover { text-decoration:none;}
+fieldset, img, button{border:0;}
+
+textarea,
+input[type="file"],
+input[type="password"],
+input[type="text"] { border:1px solid #ccc;}
+
+select:focus, textarea:focus,
+input[type="password"]:focus,
+input[type="file"]:focus,
+input[type="text"]:focus { border:1px solid #555;}
+
+textarea[readonly="readonly"],
+button[readonly="readonly"],
+select[readonly="readonly"],
+input[readonly="readonly"],
+
+textarea[disabled="disabled"],
+button[disabled="disabled"],
+select[disabled="disabled"],
+input[disabled="disabled"] { background:#f7f7f7;}
+
+input[type="password"],
+input[type="file"],
+input[type="text"] { height:15px; line-height:15px;}
+input[type="file"] { width:100%;}
+input[type="radio"] { vertical-align:text-bottom;}
+
+.block { display:block;}
+.both:after { content:""; display:block; clear:both;}
+.left { float:left;}
+.right { float:right;}
+.ab { position:absolute;}
+.rel { position:relative;}
+.btn { display:inline-block; text-align:center;}
+.p10 { padding:10px;}
+.m_t10 { margin-top:10px;}
+
