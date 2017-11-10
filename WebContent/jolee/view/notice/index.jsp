@@ -20,7 +20,7 @@
 	<tr>
 		<td><%=vo.getNo() %></td>
 		
-		<td><a href="detail.jsp?no=<%=vo.getNo() %>"><%=vo.getTitle() %></a></td>
+		<td><a href="writeDetail.jsp?no=<%=vo.getNo() %>"><%=vo.getTitle() %></a></td>
 		<td><%=vo.strRegDate() %> </td>
 	</tr>
 	<%} %>	

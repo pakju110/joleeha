@@ -12,7 +12,7 @@
 
 
 	String upfile = request.getRealPath("file");
-	upfile = "C:\\joleeha\\WebContent\\jolee\\file\\";
+	upfile = "C:\\file";
 	MultipartRequest mm = new MultipartRequest(
 			request,
 			upfile,
@@ -26,8 +26,8 @@
 	
 	vo.setCate(mm.getParameter("cate"));
 	vo.setTitle(mm.getParameter("title"));
-	vo.setSysfile(mm.getFilesystemName("orifile"));
-	vo.setOrifile(mm.getOriginalFileName("orifile"));
+	vo.setSysfile(mm.getFilesystemName("file"));
+	vo.setOrifile(mm.getOriginalFileName("file"));
 	vo.setContent(mm.getParameter("content"));
 	
 	

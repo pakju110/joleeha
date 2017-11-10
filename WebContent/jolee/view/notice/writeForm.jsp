@@ -35,8 +35,7 @@
 			</tr>
 			<tr>
 				<td>file</td>
-				<td><input type="file" name="orifile" /></td>
-				<!-- <td><input type="file" name="orifile" /></td> -->
+				<td><input type="file" name="file" /></td>
 			</tr>
 			<tr>
 				<td>³»¿ë</td>

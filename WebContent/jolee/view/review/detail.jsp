@@ -9,7 +9,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%
-	
 	ReviewVO vo = (ReviewVO)request.getAttribute("data");
 	
 	MemberVO vo2 = (MemberVO)session.getAttribute("memlogin");
