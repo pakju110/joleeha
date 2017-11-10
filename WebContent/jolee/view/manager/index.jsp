@@ -24,7 +24,7 @@
 			<td><%=vo.getEmail() %></td>
 			<td><%=vo.getGenre() %></td>
 			<td><%=vo.getGrade() %></td>
-			<td align="center"><a href="detail.jsp?id=<%=vo.getId() %>">상세</a>
+			<td align="center"><a href="detail.jsp?id=<%=vo.getId() %>">수정</a>
 		</tr>
 		<%} %>
 	</table>

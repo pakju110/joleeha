@@ -256,6 +256,25 @@ public class MemberDAO {
 		return res;
 	}
 	
+	public boolean becomeApro(String id) {
+		boolean result = false;
+		try {
+			sql = "update moviemember set grade = 'pro' where id=?";
+			
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, id);	
+			
+			if(stmt.executeUpdate()>0)
+				result = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return result;
+	}
+	
 	public boolean modify(MemberVO mem) {
 		boolean res = false;
 		try {
@@ -281,6 +300,35 @@ public class MemberDAO {
 		return res;
 	}
 
+
+	public ArrayList<MemberVO> applylist() {
+		ArrayList<MemberVO> res = new ArrayList<>();
+		try {
+			sql = "select * from moviemember where grade = 'waiter'";
+			stmt = con.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				MemberVO vo = new MemberVO();
+				vo.setId(rs.getString("id"));
+				vo.setName(rs.getString("name"));
+				vo.setNick(rs.getString("nick"));
+				vo.setPhone(rs.getString("phone"));
+				vo.setEmail(rs.getString("email"));
+				vo.setGenre(rs.getString("genre"));
+				vo.setGrade(rs.getString("grade"));
+				vo.setSysfile(rs.getString("sysfile"));
+				vo.setOrifile(rs.getString("orifile"));
+				res.add(vo);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return res;
+	}
+	
 	public void close() {
 		try {
 			if (rs != null)

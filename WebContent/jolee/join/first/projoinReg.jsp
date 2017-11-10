@@ -41,7 +41,7 @@
 	mem.setNick(mm.getParameter("nick"));
 	mem.setPhone(mm.getParameter("phone"));
 	mem.setGenre(mm.getParameter("genre"));
-	mem.setGrade("pro");
+	mem.setGrade("waiter");
 	mem.setSysfile(mm.getFilesystemName("file"));
 	mem.setOrifile(mm.getOriginalFileName("file"));
 	

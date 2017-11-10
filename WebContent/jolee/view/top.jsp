@@ -31,7 +31,7 @@
 	<div class="btm_link">
 		<%
 			for (String key2 : menuList.keySet()) {
-			if(key2.equals("cc")||key2.equals("1n1")){
+			if(key2.equals("cc")||key2.equals("1n1")||key2.equals("apply")){
 				%>
 				<p>
 					<a href="../<%=key2%>/index2.jsp"><%=menuList.get(key2)%></a>
