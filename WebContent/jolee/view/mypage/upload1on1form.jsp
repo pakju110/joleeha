@@ -22,7 +22,7 @@
 			<td colspan="2" align="center">
 			<input type="submit" value="글쓰기" class="sch" />
 			<input type="reset" value="초기화" class="sch"/>
-			<a href=index.jsp">목록으로</a>
+			<a href="index2.jsp">목록으로</a>
 			</td>
 		</tr>
 	</table>

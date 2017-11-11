@@ -1,4 +1,3 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-Copyright(c) 2017 홍길동 All rights reserved
-사업자 등록번호 : 23123-1321-321-321-321
+Copyright(c) 1조 조장 이창준  발표 조인해  메인핫산 하은주   All rights reserved
