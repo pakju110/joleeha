@@ -16,7 +16,7 @@
 		<td>${vo.no }</td>
 		
 		<td><a href="writeDetail.jsp?no=${vo.no }">${vo.title }</a></td>
-		<td>${vo.regdate } </td>
+		<td>${vo.regDate } </td>
 	</tr>
 </c:forEach>	
 
