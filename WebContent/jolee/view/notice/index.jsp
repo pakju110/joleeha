@@ -3,38 +3,30 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
-<%=request.getAttribute("serviceUrl") %>view íŽ˜ì´ì§€
-<%
-MemberVO res = (MemberVO)session.getAttribute("memlogin");
-String a = (String)request.getAttribute("cate");
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set value="${memlogin}" var="res" scope="session"/>
+<c:set value="${cate }" var="a"/>
 <table border="">
 	<tr>
 		<td>no</td>
-		<td>ì œëª©</td>
-		<td>ìž‘ì„±ì¼</td>
+		<td>Á¦¸ñ</td>
+		<td>ÀÛ¼ºÀÏÀÚ</td>
 	</tr>
 
 
-<% for(NoticeVO vo : 
-	(ArrayList<NoticeVO>)request.getAttribute("data")) {
-	
-%>
+<c:forEach items="${data }" var="vo">
 	<tr>
-		<td><%=vo.getNo() %></td>
+		<td>${vo.no }</td>
 		
-		<td><a href="writeDetail.jsp?no=<%=vo.getNo() %>"><%=vo.getTitle() %></a></td>
-		<td><%=vo.strRegDate() %> </td>
+		<td><a href="writeDetail.jsp?no=${vo.no }">${vo.title }</a></td>
+		<td>${vo.regdate }</td>
 	</tr>
-	<%}
-
-	if(res != null &&res.getGrade().equals("admin")&&a.equals("first")){
-%>	
+</c:forEach>
+<c:if test="${res!=null &&res.grade==admin&&a=='first'}">
 <tr>
 		<td colspan="3" align="right">
-			<a href="writeForm.jsp">ê¸€ì“°ê¸°</a>
+			<a href="writeForm.jsp">°øÁö»çÇ× ÀÛ¼º</a>
 		</td>
 	</tr>
-<%} %>
+</c:if>
 </table>
