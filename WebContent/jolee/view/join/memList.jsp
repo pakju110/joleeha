@@ -3,6 +3,7 @@
 <%@page import="req1.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	MemberDAO dao = new MemberDAO();
 	ArrayList<MemberVO> mems = dao.list();
@@ -21,13 +22,13 @@
 		<td>email</td>
 	</tr>
 
-<% for(MemberVO vo : mems) {%>
+ <% for(MemberVO vo : mems) {%> 
 <tr>
-		<td><a href="joinDetail.jsp?id=<%=vo.getId() %>"><%=vo.getId() %></a></td>
-		<td><%=vo.getEmail() %></td>
+		<td><a href="joinDetail.jsp?id=${vo.id }">${vo.id }</a></td>
+		<td>${vo.email }</td>
 	</tr>
 
-<%} %>
+ <%} %> 
 	<tr>
 		<td colspan="2" align="right">
 			<a href="joinForm.jsp">회원가입</a>
