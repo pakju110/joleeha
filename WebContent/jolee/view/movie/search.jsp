@@ -1,8 +1,8 @@
-
 <%@page import="lee.movieVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
 	function search(){
 			searchgenre.submit();
@@ -30,22 +30,19 @@
 		<td>삭제</td>
 	</tr>
 
-<% for(movieVO vo : 
-	(ArrayList<movieVO>)request.getAttribute("data")) {
-	
-%>
+<c:forEach items="${data }" var="vo">
 <tr>
-		<td><%=vo.getNo() %></td>
-		<td><a href="detail.jsp?no=<%=vo.getNo() %>"><%=vo.getTitle() %></a></td>
-		<td><%=vo.getGenre() %> </td>
-		<td><%=vo.getReldate() %> </td>
-		<td><%=vo.getClosedate() %> </td>
-		<td><%=vo.getRegdate() %> </td>
-		<td><a href="delete.jsp?no=<%=vo.getNo() %>">삭제</a></td>
+		<td>${vo.no }</td>
+		<td><a href="detail.jsp?no=${vo.no }">${vo.title }</a></td>
+		<td>${vo.genre } </td>
+		<td>${vo.reldate } </td>
+		<td>${vo.closedate } </td>
+		<td>${vo.regdate } </td>
+		<td><a href="delete.jsp?no=${vo.no }">삭제</a></td>
 		
 	</tr>
+</c:forEach>
 
-<%} %>
 	<tr >
 		<td colspan="7" align="center" >
 			<a href="uploadmovieform.jsp">글쓰기</a>

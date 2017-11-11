@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%
-	String id = request.getParameter("id");
-%>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set value="${param.id }" var="id"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,7 +20,7 @@
 </head>
 <body>
 <form action="delete.jsp" name="frm">
-	<input type="hidden" name="id" value="<%=id%>"/>
+	<input type="hidden" name="id" value="${id }"/>
 	<table border="">
 		
 		<tr>
@@ -32,7 +31,7 @@
 			
 			<td colspan="2" align="center">
 				<input type="button" value="Å»Åð" onclick="frmGo()" />
-				<a href="detail.jsp?id=<%=id%>">µÚ·Î</a>
+				<a href="detail.jsp?id=${id }">µÚ·Î</a>
 			</td>
 		</tr>
 	</table>

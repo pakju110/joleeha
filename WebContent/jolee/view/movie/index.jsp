@@ -1,26 +1,24 @@
-
 <%@page import="req1.MemberVO"%>
 <%@page import="lee.movieVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set value="${memlogin}" var="res" scope="session"/>
+<c:set value="${cate }" var="a"/>
+<c:set value="admin" var="admin"/>
+<c:set value="pro" var="pro"/>
+<c:set value="현재 상영중인 영화를 알려드립니다!" var="b"/>
 <%
-
 request.setCharacterEncoding("euc-kr");
-String a = (String)request.getAttribute("cate");
-MemberVO res = (MemberVO)session.getAttribute("memlogin");
-
-	String b="현재 상영중인 영화를 알려드립니다!";
-	
 %>
-<%if(a.equals("first")){
-	 b="전체 영화의 정보를 알려드립니다.";
-}
+${res.grade==admin}<br>
+${res!=null }<br>
 
-%>
-
-
-<%=b %>
+<c:if test="${a=='first'}">
+<c:set value="전체 영화의 정보를 알려드립니다." var="b"/>
+</c:if>
+${b }
 
 <script type="text/javascript">
 	function search(){
@@ -48,34 +46,28 @@ MemberVO res = (MemberVO)session.getAttribute("memlogin");
 		<td>개봉일</td>
 		<td>종료일</td>
 		<td>작성일</td>
-		<%if(/* a.equals("first")&&res.getGrade()!=null&&res.getGrade().equals("admin") */
-		res != null && (res.getGrade().equals("pro") || res.getGrade().equals("admin"))){ %>
+		<c:if test="${a=='first'&&res.grade==admin}">
 		<td>삭제</td>
-		<%} %>
+		</c:if>
 	</tr>
-
-<% for(movieVO vo : 
-	(ArrayList<movieVO>)request.getAttribute("data")) {
-	
-%>
+<c:forEach items="${data }" var="vo">
 <tr>
-		<td><%=vo.getNo() %></td>
-		<td><a href="detail.jsp?no=<%=vo.getNo() %>"><%=vo.getTitle() %></a></td>
-		<td><%=vo.getGenre() %> </td>
-		<td><%=vo.getReldate() %> </td>
-		<td><%=vo.getClosedate() %> </td>
-		<td><%=vo.getRegdate() %> </td>
-		<%if(res != null && (res.getGrade().equals("pro") || res.getGrade().equals("admin"))){ %>
-		<td><a href="delete.jsp?no=<%=vo.getNo() %>">삭제</a></td>
-		<%} %>
+		<td>${vo.no }</td>
+		<td><a href="detail.jsp?no=${vo.no }">${vo.title }</a></td>
+		<td>${vo.genre } </td>
+		<td>${vo.reldate } </td>
+		<td>${vo.closedate } </td>
+		<td>${vo.regdate } </td>
+		<c:if test="${a=='first'&&res!=null &&res.grade==admin}">
+		<td><a href="delete.jsp?no=${vo.no}">삭제</a></td>
+		</c:if>
 	</tr>
-
-<%}
-	if(res != null && res.getGrade().equals("admin")){%>
+</c:forEach>
+<c:if test="${a=='first'&&res!=null &&res.grade==admin}">
 	<tr >	
 		<td colspan="7" align="center" >
 			<a href="uploadmovieform.jsp">글쓰기</a>
 		</td>
 	</tr>
-	<%} %>
+	</c:if>
 </table>

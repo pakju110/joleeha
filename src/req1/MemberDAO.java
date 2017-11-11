@@ -177,7 +177,7 @@ public class MemberDAO {
 		try {
 
 			sql = "insert into moviemember (id, name, pw, nick, phone, gender, email, "
-					+ "grade, sysfile, orifile, genre) values (" + "?,?,?,?,?,?,?,?,?,?,?)";
+					+ "grade, sysfile, orifile, genre) values (?,?,?,?,?,?,?,?,?,?,?)";
 
 			System.out.println(sql);
 
