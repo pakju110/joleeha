@@ -226,34 +226,34 @@ public class MemberDAO {
 	}
 
 	public boolean delete(MemberVO mem) {
-		boolean res = false;
-		try {
+	      boolean res = false;
+	      String k= null;
+	      try {
 
-			sql = "select * from moviemember where id=?";
-			stmt = con.prepareStatement(sql);
-			stmt.setString(1, mem.getId());
-			rs = stmt.executeQuery();
-			if (rs.next())
-				mem.setSysfile(rs.getString("sysfile"));
+	         sql = "select * from moviemember where id=?";
+	         stmt = con.prepareStatement(sql);
+	         stmt.setString(1, mem.getId());
+	         rs = stmt.executeQuery();
+	         if (rs.next())
+	            k =rs.getString("sysfile");
 
-			sql = "delete from moviemember where id=? and pw = ?";
-			stmt = con.prepareStatement(sql);
-			stmt.setString(1, mem.getId());
-			stmt.setString(2, mem.getPw());
+	         sql = "delete from moviemember where id=? and pw = ?";
+	         stmt = con.prepareStatement(sql);
+	         stmt.setString(1, mem.getId());
+	         stmt.setString(2, mem.getPw());
 
-			if (stmt.executeUpdate() > 0) {
-				res = true;
-				new MFile().fileDelete(mem);
-			}
-			
-		} catch (Exception e) {
+	         if (stmt.executeUpdate() > 0) {
+	            res = true;
+	            new MFile().fileDelete(k);
+	         }
+	      } catch (Exception e) {
 
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-		return res;
-	}
+	         e.printStackTrace();
+	      } finally {
+	         close();
+	      }
+	      return res;
+	   }
 
 	public boolean changegrade(String id, String grade) {
 		boolean res= false;
