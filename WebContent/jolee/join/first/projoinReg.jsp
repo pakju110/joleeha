@@ -50,7 +50,7 @@
 	String msg = "";
 	String url = "joinForm.jsp?id="+mem.getId();
 	
-	if(!mem.getPw().equals("pwc")){
+	if(!mem.getPw().equals(request.getParameter("pwc"))){
 		msg = "비밀번호가 일치하지 않거나 입력되지 않았습니다.";
 	}
 	else //if(new MemberDAO().insert(mem))

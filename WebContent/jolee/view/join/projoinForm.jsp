@@ -101,7 +101,7 @@
 			<td colspan="2" align="center">
 			<input type="submit" value="가입" class="sch" />
 			<input type="reset" value="초기화" class="sch"/>
-			<a href="memList.jsp">목록으로</a>
+			<a href="index.jsp">뒤로</a>
 			</td>
 		</tr>
 	</table>

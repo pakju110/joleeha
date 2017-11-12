@@ -37,18 +37,17 @@ MemberVO vo=(MemberVO)request.getAttribute("vo");
 		</tr>
 		<tr>
 			<td>비밀번호</td><%-- value="<%=vo.getPw()%>" --%>
-			<td><input type="text" name="pw"  /></td>
+			<td><input type="password" name="pw" value="<%=vo.getPw()%>"  /></td>
 		</tr>
 		<tr>
 			<td>성별</td>
 			<td>
-			
 			<%
 				LinkedHashMap <String , String >gender= new LinkedHashMap();
 				gender.put("m", "남");
 				gender.put("f", "여");
 			for(String key : gender.keySet()) {
-				String chk ="";/* 수정해야함 */
+				String chk ="";
 				
 				if(vo.getGender().equals(key))
 					chk="checked=\"checked\"";

@@ -44,7 +44,7 @@
 	{
 		msg = "비밀번호를 입력하세요.";
 		
-	} else if(!mem.getPw().equals("pw"))
+	} else if(!mem.getPw().equals(request.getParameter("pw")))
 	{
 		msg = "잘못된 비밀번호입니다.";
 		

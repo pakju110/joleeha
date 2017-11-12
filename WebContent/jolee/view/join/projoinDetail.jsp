@@ -44,7 +44,6 @@
 	</tr><tr>
 	<tr>
 		<td colspan="2" align="right">
-			<a href="memList.jsp">회원목록</a>
 			<a href="deleteForm.jsp?id=<%=vo.getId() %>">회원탈퇴</a>
 			<a href="modifyForm.jsp?id=<%=vo.getId() %>">정보수정</a>
 		</td>
