@@ -1,9 +1,9 @@
 <%@page import="req1.MemberVO"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%-- <%
 	MemberVO vo = (MemberVO)session.getAttribute("mem");
 %>
-<%=vo.getName() %>´Ô ¾È³çÇÏ¼¼¿ä
-<a href="../../login/logout.jsp?goUrl=<%=(String)request.getAttribute("nowUrl")%>">·Î±×¾Æ¿ô</a>
+<%=vo.getName() %>ë‹˜ ì•ˆë…•í•˜ì„¸ìš”
+<a href="../../login/logout.jsp?goUrl=<%=(String)request.getAttribute("nowUrl")%>">ë¡œê·¸ì•„ì›ƒ</a>
  --%>

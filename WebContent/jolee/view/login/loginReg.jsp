@@ -2,8 +2,8 @@
 <%@page import="req1.MemberDAO"%>
 <%@page import="req1.MemberVO"%>
 <%@page import="java.util.HashMap"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%-- <%
 	HashMap<String, String[]> map = new HashMap();
 
@@ -14,12 +14,12 @@
 	vo.setPw(request.getParameter("pw"));
 	MemberVO res = new MemberDAO().login(vo);
 	String url = "loginForm.jsp";
-	String msg = "id¿Í pw°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.";
+	String msg = "idì™€ pwê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
 
 	if (res != null) {
 		//url = "../../../cateCompany/center/first/index.jsp?memmm=" + res.getName();
 		url = "../../../jolee/movie/first/index.jsp?";
-		msg = res.getName() + "´Ô ·Î±×ÀÎ ÇÏ¼Ì½À´Ï´Ù.";
+		msg = res.getName() + "ë‹˜ ë¡œê·¸ì¸ í•˜ì…¨ìŠµë‹ˆë‹¤.";
 
 		session.setAttribute("mem", res.getName());
 

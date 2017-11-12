@@ -1,40 +1,38 @@
 <%@page import="req1.MemberVO"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%
-	String memId="";
-	if(request.getParameter("memId")!=null)
-		memId=request.getParameter("memId");
-%>
-<% 
-	MemberVO vo = (MemberVO)session.getAttribute("memlogin");
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set value="${memlogin}" var="vo" scope="session"/>
 
-	if(vo!=null){
-%>
-<%=vo.getName() %>´Ô ¾È³çÇÏ¼¼¿ä
-<a href="../../login/logout.jsp">·Î±×¾Æ¿ô</a>	
-<%} else { %>
+<c:set value="" var="memId"/>
 
-<script type="text/javascript">
-function frmChange()
-{
+<c:if test="${param.memId !=null}">
+<c:set value="${param.memId }" var="memId"/>
+</c:if>
 
-	frm.action="../../join/first/index.jsp";
-	frm.submit();
-			
-}
+<c:choose>
+<c:when  test="${vo!=null }">
+	${memlogin.name } ë‹˜ ì•ˆë…•í•˜ì„¸ìš” !
 
-</script>
-<%-- <a href="../../login/logout.jsp?goUrl=<%=(String)request.getAttribute("nowUrl")%>">·Î±×ÀÎ</a> --%>
+<a href="../../login/logout.jsp">ë¡œê·¸ì•„ì›ƒ</a>	
+</c:when>
+<c:otherwise>
+	<script type="text/javascript">
+		function frmChange(){
+		
+			frm.action="../../join/first/index.jsp";
+			frm.submit();
+		}
+	</script>
 
 <form action="../../login/loginReg.jsp" name = "frm">
-	<input type="hidden" name="goUrl" value="<%=(String)request.getAttribute("nowUrl") %>" />
-	¾ÆÀÌµğ:<input type="text" name="memId" value="<%=memId%>"/>
-	ºñ¹Ğ¹øÈ£:<input type="text" name="memPw" />
-	<input type="submit" value="·Î±×ÀÎ" />
-	<input type="button" value="È¸¿ø°¡ÀÔ" onclick="frmChange()" />
+	<input type="hidden" name="goUrl" value="${nowUrl }" />
+	ì•„ì´ë””:<input type="text" name="memId" value="${memId }"/>
+	ë¹„ë°€ë²ˆí˜¸:<input type="password" name="memPw" />
+	<input type="submit" value="ë¡œê·¸ì¸" />
+	<input type="button" value="íšŒì›ê°€ì…" onclick="frmChange()" />
 	
 </form>
+</c:otherwise>
+</c:choose>
 
-
-<%} %>

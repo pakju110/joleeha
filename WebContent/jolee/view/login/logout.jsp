@@ -1,7 +1,7 @@
 <%@page import="req1.MemberVO"%>
 <%@page import="java.util.HashMap"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%-- <%
 
 	MemberVO vo = (MemberVO)session.getAttribute("mem");
@@ -13,7 +13,7 @@
 %>
 
 <script type="text/javascript">
-	 alert('<%=vo.getName()%>´Ô ·Î±×¾Æ¿ôµÇ¾ú½À´Ï´Ù.');
+	 alert('<%=vo.getName()%>ë‹˜ ë¡œê·¸ì•„ì›ƒë˜ì—ˆìŠµë‹ˆë‹¤.');
 	location.href="main.jsp";
 </script>
 
