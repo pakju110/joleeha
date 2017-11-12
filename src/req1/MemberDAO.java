@@ -245,6 +245,7 @@ public class MemberDAO {
 				res = true;
 				new MFile().fileDelete(mem);
 			}
+			
 		} catch (Exception e) {
 
 			e.printStackTrace();

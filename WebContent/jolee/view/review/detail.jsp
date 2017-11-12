@@ -16,6 +16,7 @@
 	int no = Integer.parseInt((String)session.getAttribute("no"));
 	String cate = (String)session.getAttribute("cate");
 	request.setCharacterEncoding("euc-kr");
+	
 	ScrapVO scvo = new ScrapDAO().detail(vo2.getId(),cate,Integer.parseInt(request.getParameter("no")));
 %>
 
