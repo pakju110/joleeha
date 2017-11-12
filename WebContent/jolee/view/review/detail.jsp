@@ -1,96 +1,87 @@
-<%@page import="movie.ScrapDAO"%>
-<%@page import="movie.ScrapVO"%>
-<%@page import="req1.MemberVO"%>
-<%@page import="movie.ComentVO"%>
-<%@page import="movie.ComentDAO"%>
-<%@page import="movie.ReviewVO"%>
-<%@page import="java.util.ArrayList"%>
 
+<%@page import="java.util.ArrayList"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	ReviewVO vo = (ReviewVO)request.getAttribute("data");
-	
-	MemberVO vo2 = (MemberVO)session.getAttribute("memlogin");
-	int no = Integer.parseInt((String)session.getAttribute("no"));
-	String cate = (String)session.getAttribute("cate");
-	request.setCharacterEncoding("euc-kr");
-	
-	ScrapVO scvo = new ScrapDAO().detail(vo2.getId(),cate,Integer.parseInt(request.getParameter("no")));
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set value="${data }" var="vo" />
+<c:set value="${cate }" var="c" />
+<c:set value="${scrapdate }" var="scvo" />
+<c:set value="${memlogin }" var="vo2" />
 
 <table border="">
 	<tr>
 		<td>title</td>
-		<td><%=vo.getTitle() %></td>
+		<td>${ vo.title}</td>
 	</tr>
 	<tr>
 		<td>º°Á¡</td>
-		<td><%for(int i=0; i<vo.getStar();i++){%>¡Ú<%} %></td>
+		<td><c:forEach begin="1" end="${vo.star}" step="1">
+			¡Ú
+			</c:forEach></td>
 	</tr>
 	<tr>
 		<td>ganre</td>
-		<td><%=vo.getGenre() %></td>
+		<td>${ vo.genre}</td>
 	</tr>
 	<tr>
 		<td>id</td>
-		<td><%=vo.getId() %></td>
+		<td>${ vo.id}</td>
 	</tr>
 	<tr>
 		<td>content</td>
-		<td><%=vo.getContent() %>
-		<% if(vo.getOrifile() != null){ %>
-		<br/>
-		<a href="download.jsp?Sysfile=<%=vo.getSysfile() %>&Orifile=<%=vo.getOrifile() %>" ><%=vo.getOrifile() %></a><br/>
-		<%} %>
+		<td>${vo.content }<c:if test="${vo.orifile != null }">
+				<br />
+				<a
+					href="download.jsp?Sysfile=${ vo.sysfile}&Orifile=${vo.orifile}">${vo.orifile}</a>
+				<br />
+			</c:if>
 		</td>
 	</tr>
 	<tr>
-		
-		<%if( vo2 != null && vo2.getId().equals(vo.getId())){ %>
-		<td colspan="2" align="right">
-			<a href="delcheck.jsp?no=<%=vo.getNo() %>">»èÁ¦</a><a href="index.jsp">list</a>
-		</td>
-		<%} %>
+		<c:if test="${vo2 != null&& vo2.id== vo.id }"> 
+			<td colspan="2" align="right"><a
+				href="delcheck.jsp?no=${vo.no}">»èÁ¦</a><a href="index.jsp">list</a>
+			</td>
+		</c:if> 
 	</tr>
 </table>
 
 <div class="bx_cmt">
-
-	<%ComentDAO cmt = new ComentDAO();
-
-		for (ComentVO cvo : cmt.list(cate, no)) {
-			%>
-			<div class="cmt">
-				<div><%=cvo.getId() %></div>
-				<div><%=cvo.getContent() %></div>
-				<p><%=cvo.getRegDate()%>
-				<%if( vo2 != null && (vo2.getId().equals(cvo.getId())||vo2.getGrade().equals("admin"))){ %>
-				<a href="deletecmt.jsp?cno=<%=cvo.getCno()%>&no=<%=cvo.getNo()%>">»èÁ¦</a>
-				<%} %></p>
-			</div>
+ 
+	<c:forEach items="${commnetdata}" var="cmt">
+		<div class="cmt">
+			<div>${cmt.id}</div>
+			<div>${cmt.content}</div>
+			<p>${cmt.regDate}
+			<c:if test="${ vo2 != null &&( vo2.id == cmt.id || vo2.grade == 'admin' )}">
+					<a href="deletecmt.jsp?cno=${cmt.cno }&no=${ cmt.no}">»èÁ¦</a>
+				</c:if>
+			</p>
 			
-			<%
-		}if( vo2 != null){
-	%>
+		</div>
+	</c:forEach>
 
-	<form action="commentReg.jsp" method="post">
-		<div class="writ_comment">
-			<textarea name="content"></textarea>
-		</div>
-		<div align="center">
-			<input type="submit" value="´ñ±Û¾²±â">
-		</div>
-	</form>
-	<%if(scvo == null ||scvo.getId() == null){  %>
-	<a href="scrap.jsp?cate=<%=vo.getCate()%>&no=<%=vo.getNo()%>">½ºÅ©·¦</a>
-	
-	<%}else{
-		
-		%><a href="delscrap.jsp?cate=<%=vo.getCate()%>&no=<%=vo.getNo()%>">½ºÅ©·¦Ãë¼Ò</a><%
-	}
-}
-%>
-	
+	<c:if test="${vo2 != null}">
+
+		<form action="commentReg.jsp" method="post">
+			<div class="writ_comment">
+				<textarea name="content"></textarea>
+			</div>
+			<div align="center">
+				<input type="submit" value="´ñ±Û¾²±â">
+			</div>
+		</form>
+</c:if>
+		<c:choose>
+			<c:when test="${scvo==null || scvo.id == null }">
+				<a href="scrap.jsp?cate=${vo.cate}&no=${vo.no}">½ºÅ©·¦</a>
+
+			</c:when>
+			<c:otherwise>
+				<a href="delscrap.jsp?cate=${vo.cate}&no=${vo.no}">½ºÅ©·¦Ãë¼Ò</a>
+			</c:otherwise>
+		</c:choose>
+
 </div>

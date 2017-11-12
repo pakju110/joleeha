@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../../css/default.css">
 <link rel="stylesheet" type="text/css" href="../../css/pc.css">
-<script type="text/javascript" src="../js/common.js"></script>
+
 </head>
 <body>
 <div class="wrap">
