@@ -14,6 +14,7 @@
 <c:when  test="${vo!=null }">
 	${memlogin.name } 님 안녕하세요 !
 
+
 <a href="../../login/logout.jsp">로그아웃</a>	
 </c:when>
 <c:otherwise>
