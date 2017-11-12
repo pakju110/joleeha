@@ -8,8 +8,8 @@
 <c:set value="${data }" var="vo" />
 <c:set value="${cate }" var="c" />
 <c:set value="${scrapdate }" var="scvo" />
-<c:set value="${memlogin }" var="vo2" />
-
+<c:if test="${memlogin != null }"><c:set value="${memlogin }" var="vo2" />
+</c:if>
 <table border="">
 	<tr>
 		<td>title</td>
@@ -55,15 +55,17 @@
 			<div>${cmt.id}</div>
 			<div>${cmt.content}</div>
 			<p>${cmt.regDate}
+			<c:if test="${memlogin != null }">
 			<c:if test="${ vo2 != null &&( vo2.id == cmt.id || vo2.grade == 'admin' )}">
 					<a href="deletecmt.jsp?cno=${cmt.cno }&no=${ cmt.no}">»èÁ¦</a>
+				</c:if>
 				</c:if>
 			</p>
 			
 		</div>
 	</c:forEach>
 
-	<c:if test="${vo2 != null}">
+	<c:if test="${memlogin != null }">
 
 		<form action="commentReg.jsp" method="post">
 			<div class="writ_comment">
@@ -73,15 +75,16 @@
 				<input type="submit" value="´ñ±Û¾²±â">
 			</div>
 		</form>
-</c:if>
+	</c:if>
+	<c:if test="${memlogin != null }">
 		<c:choose>
 			<c:when test="${scvo==null || scvo.id == null }">
-				<a href="scrap.jsp?cate=${vo.cate}&no=${vo.no}">½ºÅ©·¦</a>
+				<a href="scrap.jsp?cate=${vo.cate}&no=${vo.no}">½ºÅ©·¦<img alt="ÇÏÆ®" src="../../img/icon_off_08.gif"/></a>
 
 			</c:when>
 			<c:otherwise>
-				<a href="delscrap.jsp?cate=${vo.cate}&no=${vo.no}">½ºÅ©·¦Ãë¼Ò</a>
+				<a href="delscrap.jsp?cate=${vo.cate}&no=${vo.no}">½ºÅ©·¦Ãë¼Ò<img alt="ÇÏÆ®" src="../../img/icon_on_08.gif"/></a>
 			</c:otherwise>
 		</c:choose>
-
+	</c:if>
 </div>

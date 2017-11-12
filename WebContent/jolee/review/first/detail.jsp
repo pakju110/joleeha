@@ -15,9 +15,10 @@ MemberVO vo2 = (MemberVO)session.getAttribute("memlogin");
 request.setAttribute("data",  new ReviewDAO().detail(a));
 session.setAttribute("no", request.getParameter("no"));
 session.setAttribute("cate", "first");
+if(vo2 != null){
 request.setAttribute("scrapdate", new ScrapDAO().detail(vo2.getId(),"first",a));
 
-
+}
 request.setAttribute("commnetdata", new ComentDAO().list("first",a));
 %>
 <jsp:forward page="../../view/template.jsp"></jsp:forward>
