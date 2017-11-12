@@ -2,6 +2,9 @@
 <%@page import="req1.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%--     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set value="${memlogin}" var="res" scope="session"/>
+<c:set value="${cate }" var="a"/> --%>
     <%
     
     MemberVO vo = (MemberVO)request.getAttribute("data");

@@ -4,10 +4,10 @@
     pageEncoding="EUC-KR"%>
 <%
 	String sys = request.getParameter("sys");
-	String ori = request.getParameter("sys");
+	String ori = request.getParameter("ori");
 	
 	String upfile = request.getRealPath("ff");
-	upfile =  "C:\\file";
+	upfile =  "C:/Users/pc/eclipse-workspace/workspace/WebContent/jolee/file";
 	
 	String en = URLEncoder.encode(ori,"utf-8");
 	response.setHeader("Content-Disposition", "attachment;filename="+en);

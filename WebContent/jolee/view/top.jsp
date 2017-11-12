@@ -1,49 +1,31 @@
 <%@page import="req1.MemberVO"%>
 <%@page import="java.util.LinkedHashMap"%>
-
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<%
-	LinkedHashMap<String, String> top = (LinkedHashMap<String, String>) request.getAttribute("top");
-	LinkedHashMap<String, String> menuList = (LinkedHashMap<String, String>) request.getAttribute("menuList");
- String loginPage = (String) request.getAttribute("loginPage");
- MemberVO vo = (MemberVO)session.getAttribute("memlogin");
-%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="gnb">
 
-<%-- ${ loginPage}
-<jsp:include page="${ loginPage}"/>  --%>
+<jsp:include page="${loginPage }"/> 
 
-<jsp:include page="<%=loginPage%>"/> 
-
-
-	<%
-		for (String key : top.keySet()) {
-
-	%>
-	<a href="../../<%=key%>/first/index.jsp" class="link"><%=top.get(key)%></a>
-	
-	<%
-		}
-	%>
+<c:forEach items="${top}" var="im" >
+	<a href="../../${im.key }/first/index.jsp" class="link">${im.value }</a>
+</c:forEach>
 	<div class="btm_link">
-		<%
-			for (String key2 : menuList.keySet()) {
-			if(key2.equals("cc")||key2.equals("1n1")||key2.equals("apply")){
-				%>
-				<p>
-					<a href="../<%=key2%>/index2.jsp"><%=menuList.get(key2)%></a>
-				</p>
-				<%
-			 }else{
-		%>
-				<p>
-			<a href="../<%=key2%>/index.jsp"><%=menuList.get(key2)%></a>
-		</p>
-		<%
-			 } }
-		%>
+		<c:forEach items="${menuList}" var="metoo">
+			<c:choose>
+				<c:when test="${metoo.key=='cc'||metoo.key=='1n1'||metoo.key=='apply'}">
+					<p>
+						<a href="../${metoo.key }/index2.jsp">${metoo.value }</a>
+					</p>
+				</c:when>
+				<c:otherwise>
+					<p>
+						<a href="../${metoo.key }/index.jsp">${metoo.value }></a>
+					</p>
+		
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
 	</div>
 </div>

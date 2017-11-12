@@ -3,6 +3,7 @@
 <%@page import="req1.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<table border="">
 		<tr>
 			<td>아이디</td>
@@ -14,19 +15,18 @@
 			<td>회원 등급</td>
 			<td>등급 수정</td>
 		</tr>
-	<% for(MemberVO vo : 
-	(ArrayList<MemberVO>)request.getAttribute("data")) {%>
+<c:forEach items="${data }" var="vo">
 		<tr>
-			<td><%=vo.getId() %></td>
-			<td><%=vo.getName() %></td>
-			<td><%=vo.getNick() %></td>
-			<td><%=vo.getPhone() %></td>
-			<td><%=vo.getEmail() %></td>
-			<td><%=vo.getGenre() %></td>
-			<td><%=vo.getGrade() %></td>
-			<td align="center"><a href="detail.jsp?id=<%=vo.getId() %>">수정</a>
+			<td>${vo.id }</td>
+			<td>${vo.name }</td>
+			<td>${vo.nick }</td>
+			<td>${vo.phone }</td>
+			<td>${vo.email }</td>
+			<td>${vo.genre }</td>
+			<td>${vo.grade }</td>
+			<td align="center"><a href="detail.jsp?id=${vo.id }">수정</a>
 		</tr>
-		<%} %>
+	</c:forEach>
 	</table>
 
 

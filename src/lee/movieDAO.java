@@ -208,14 +208,13 @@ public class movieDAO {
 	public ArrayList<ReviewVO> recommendlist(){
 		ArrayList<ReviewVO> res =new ArrayList<>();
 		try {
-			sql = "select movietitle, round(avg(star),1) star, genre from moviereview group by movietitle ,genre order by star desc";
+			sql = "select LOWER(movietitle), round(avg(star),1) star, genre from moviereview group by LOWER(movietitle) ,genre order by star desc";
 			stmt = con.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			while(rs.next())
 			{
 				ReviewVO vo = new ReviewVO();
-				vo.setMovietitle(rs.getString("movietitle"));
-//				vo.setStar(rs.getInt("round(avg(star),2)"));
+				vo.setMovietitle(rs.getString("LOWER(movietitle)"));
 				vo.setStar(rs.getDouble("star"));
 				vo.setGenre(rs.getString("genre"));
 				res.add(vo);

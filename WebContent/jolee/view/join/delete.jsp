@@ -2,7 +2,9 @@
 <%@page import="req1.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set value="${msg }" var="a"/>
+<c:set value="${url }" var="a"/>
 <%
 	 request.setCharacterEncoding("euc-kr"); 
 %>    
@@ -16,8 +18,8 @@
 <body>
 <script type="text/javascript">
 
-	alert('<%=request.getAttribute("msg")%>'); 
-	location.href = '<%=request.getAttribute("url")%>';
+	alert('${a}'); 
+	location.href = '${b}';
 	
 </script>
 </body>

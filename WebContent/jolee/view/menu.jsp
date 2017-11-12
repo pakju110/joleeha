@@ -2,15 +2,14 @@
 <%@page import="java.util.LinkedHashMap"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 
-	LinkedHashMap<String, String> menuList = 
-	(LinkedHashMap<String, String>)request.getAttribute("menuList");
-%>
 <table width="100%">
-<% for(String key : menuList.keySet()) {%>
+<c:forEach items="${menuList }" var="im">
+
 	<tr align="center">
-		<td><a href="../<%=key%>/index.jsp"><%=menuList.get(key) %></a></td>
+		<td><a href="../${im.key }/index.jsp">${im.value }</a></td>
 	</tr>
-	<%} %>
+	
+</c:forEach>
 </table>

@@ -1,15 +1,15 @@
-<%@page import="req1.MemberDAO"%>
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<% 
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
+<c:set value="${param.id}" var="id"/>
+<c:set value="" var="id"/>
 
-	MemberDAO dao = new MemberDAO();
-	String id="";
-	
-	if(request.getParameter("id")!=null)
-	id = request.getParameter("id");	
 
-%>
+<c:if test="${id!=null }">
+	<c:set value="${param.id }" var="id"/>
+</c:if>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,7 +35,7 @@
 	<table border=1>
 		<tr>
 			<td>아이디</td>
-			<td><input type="text" name="id" size="10" maxlength="8" />
+			<td><input type="text" name="id" size="10" maxlength="8" value="${id }"/>
 			<input type="button" onclick="idCheck()"  name="sch" class="sch" value="id중복확인"/>
 			</td>
 		</tr>
@@ -97,18 +97,6 @@
 				</select>
 			</td>
 		</tr>
-		<!-- <tr>
-			<td>등급</td>
-			<td><input type="text" name="grade" /></td>
-		</tr> -->
-		<!-- <tr>
-			<td>취미</td>
-			<td>
-			<input type="checkbox" name="hobby" value="read"/>독서
-			<input type="checkbox" name="hobby" value="game" checked="checked"/>게임
-			<input type="checkbox" name="hobby" value="fish" checked="checked"/>낚시
-			</td>
-		</tr> -->
 		<tr>
 			<td colspan="2" align="center">
 			<input type="submit" value="가입" class="sch" />
