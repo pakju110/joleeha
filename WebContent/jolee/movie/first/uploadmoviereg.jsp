@@ -12,7 +12,7 @@
 
 <%
 	String upfile = request.getRealPath("ff");
-	upfile = "C:\\file";
+	upfile = "C:\\projwork\\joleeha\\WebContent\\jolee\\file";
 	MultipartRequest mm = new MultipartRequest(request, upfile, 10 * 1024 * 1024, "euc-kr",
 			new DefaultFileRenamePolicy());
 	request.setCharacterEncoding("euc-kr");

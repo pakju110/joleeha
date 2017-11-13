@@ -7,10 +7,6 @@
 <%
 	request.setCharacterEncoding("euc-kr");
 %>
-${res.grade==admin}
-<br>
-${res!=null }
-<br>
 
 
 <%-- 
@@ -49,17 +45,19 @@ ${res!=null }
 				<ul>
 					<li><a href="../../movie/first/index.jsp">전체영화</a></li>
 					<li><a href="../../movie/ing/index.jsp">상영영화</a></li>
-					<li><a href="../../movie/cc/index.jsp">추천영화</a></li>
+					<li><a href="../../movie/cc/index2.jsp">추천영화</a></li>
 				</ul></li>
 			<li><a href="../../review/first/index.jsp">리뷰</a>
 				<ul>
 					<li><a href="../../review/first/index.jsp">전문가리뷰</a></li>
 					<li><a href="../../review/user/index.jsp">네티즌리뷰</a></li>
 				</ul></li>
-			<li><a href="../../movie/first/index.jsp">공지사항</a>
+			<li><a href="../../notice/first/index.jsp">공지사항</a>
 				<ul>
 					<li><a href="../../notice/first/index.jsp">공지사항</a></li>
+					<c:if test="${memlogin != null && memlogin.grade != black }">
 					<li><a href="../../notice/event/index.jsp">할인정보</a></li>
+					</c:if>
 				</ul>
 			</li>
 			<c:if test="${res.grade=='admin'}">
@@ -67,17 +65,17 @@ ${res!=null }
 					<ul>
 						<li><a href="../../manager/first/index.jsp">회원전체보기</a></li>
 						<li><a href="../../manager/apply/index2.jsp">전문가신청목록</a></li>
-						<li><a href="../../manager/violate/index.jsp">신고글</a></li>
+						<li><a href="../../manager/1on1list/index3.jsp">1:1문의</a></li>
 					</ul>
 				</li>
 			</c:if>
-			<c:if test="${res.grade=='user' ||res.grade=='pro'}">
-				<li><a href="../../mypage/first/index.jsp">관리자페이지</a>
+			<c:if test="${res.grade=='user' ||res.grade=='pro' || res.grade == 'black'}">
+				<li><a href="../../mypage/first/index.jsp">마이페이지</a>
 					<ul>
 						<li><a href="../../mypage/first/index.jsp">회원정보</a></li>
-						<li><a href="../../mypage/history/index.jsp">내가 쓴 글</a></li>
+						<li><a href="../../mypage/history/index3.jsp">내가 쓴 글</a></li>
 						<li><a href="../../mypage/1n1/index2.jsp">1:1문의</a></li>
-						<li><a href="../../mypage/sc/index.jsp">스크랩목록</a></li>
+						<li><a href="../../mypage/sc/index4.jsp">스크랩목록</a></li>
 					</ul>
 				</li>
 			</c:if>

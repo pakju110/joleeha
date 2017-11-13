@@ -254,6 +254,24 @@ public class MemberDAO {
 	      }
 	      return res;
 	   }
+	public boolean becomeAuser(String id) {
+	      boolean result = false;
+	      try {
+	         sql = "update moviemember set grade = 'user' where id=?";
+	         
+	         stmt = con.prepareStatement(sql);
+	         stmt.setString(1, id);   
+	         
+	         if(stmt.executeUpdate()>0)
+	            result = true;
+	      } catch (Exception e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      } finally {
+	         close();
+	      }
+	      return result;
+	   }
 
 	public boolean changegrade(String id, String grade) {
 		boolean res= false;
@@ -334,7 +352,7 @@ public class MemberDAO {
 			sql = "select * from moviemember where grade = 'waiter'";
 			stmt = con.prepareStatement(sql);
 			rs = stmt.executeQuery();
-			if(rs.next()) {
+			while(rs.next()) {
 				MemberVO vo = new MemberVO();
 				vo.setId(rs.getString("id"));
 				vo.setName(rs.getString("name"));

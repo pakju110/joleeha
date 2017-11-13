@@ -31,16 +31,18 @@
 	</tr>
 	<tr>
 		<td>content</td>
-		<td>${vo.content }<c:if test="${vo.orifile != null }">
+		<td><c:if test="${vo.sysfile != null }">
+				<img src="../../file/${vo.sysfile}" alt="">
 				<br />
 				<a
-					href="download.jsp?Sysfile=${ vo.sysfile}&Orifile=${vo.orifile}">${vo.orifile}</a>
+					href="download.jsp?sysfile=${ vo.sysfile}&orifile=${vo.orifile}">${vo.orifile}</a>
 				<br />
 			</c:if>
+			${vo.content }
 		</td>
 	</tr>
 	<tr>
-		<c:if test="${vo2 != null&& vo2.id== vo.id }"> 
+		<c:if test="${vo2 != null&& (vo2.id== vo.id || vo2.grade == 'admin') && vo2.grade != 'black'}"> 
 			<td colspan="2" align="right"><a
 				href="delcheck.jsp?no=${vo.no}">삭제</a><a href="index.jsp">list</a>
 			</td>
@@ -56,7 +58,7 @@
 			<div>${cmt.content}</div>
 			<p>${cmt.regDate}
 			<c:if test="${memlogin != null }">
-			<c:if test="${ vo2 != null &&( vo2.id == cmt.id || vo2.grade == 'admin' )}">
+			<c:if test="${ vo2 != null &&( vo2.id == cmt.id || vo2.grade == 'admin' ) && vo2.grade != 'black'}">
 					<a href="deletecmt.jsp?cno=${cmt.cno }&no=${ cmt.no}">삭제</a>
 				</c:if>
 				</c:if>
@@ -65,7 +67,7 @@
 		</div>
 	</c:forEach>
 
-	<c:if test="${memlogin != null }">
+	<c:if test="${memlogin != null  && vo2.grade != 'black'}">
 
 		<form action="commentReg.jsp" method="post">
 			<div class="writ_comment">
@@ -76,7 +78,7 @@
 			</div>
 		</form>
 	</c:if>
-	<c:if test="${memlogin != null }">
+	<c:if test="${memlogin != null  && vo2.grade != 'black'}">
 		<c:choose>
 			<c:when test="${scvo==null || scvo.id == null }">
 				<a href="scrap.jsp?cate=${vo.cate}&no=${vo.no}">스크랩<img alt="하트" src="../../img/icon_off_08.gif"/></a>

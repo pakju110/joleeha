@@ -3,11 +3,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%
-	String sys = request.getParameter("Sysfile");
-	String ori = request.getParameter("Orifile");
+	String sys = request.getParameter("sysfile");
+	String ori = request.getParameter("orifile");
 	
 	String upfile = request.getRealPath("file");
-	upfile = "C:/Users/JHTA/git/joleeha/WebContent/jolee/file";
+	upfile = "C:\\projwork\\joleeha\\WebContent\\jolee\\file";
 	
 	String en = URLEncoder.encode(ori, "utf-8");
 	response.setHeader("Content-Disposition", "attachment;filename="+en);

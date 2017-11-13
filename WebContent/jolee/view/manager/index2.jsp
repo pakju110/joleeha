@@ -22,7 +22,7 @@
 			<td>${vo.email }</td>
 			<td><a href="download.jsp?Sysfile=${vo.sysfile }&Orifile=${vo.orifile }" >${vo.orifile }</a></td>
 			<td><a href="admit.jsp?id=${vo.id }">승인</a> </td>
-			<td><a href="index2.jsp">거부</a></td>
+			<td><a href="deny.jsp?id=${vo.id }">거부</a></td>
 		</tr>
 </c:forEach>
 </table>

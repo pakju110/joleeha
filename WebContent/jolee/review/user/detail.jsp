@@ -5,19 +5,20 @@
 <%@page import="movie.ReviewDAO"%>
 <%@page import="req.GalleryDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
 center/notice/list
-<%@ include file="../../inc/menuData.jsp" %>
+<%@ include file="../../inc/menuData.jsp"%>
 <%
-	int a = Integer.parseInt(request.getParameter("no"));
-	MemberVO vo2 = (MemberVO)session.getAttribute("memlogin");
-	request.setAttribute("data",  new ReviewDAO().detail(a));
-	session.setAttribute("no", request.getParameter("no"));
-	session.setAttribute("cate", "user");
-	request.setAttribute("scrapdate", new ScrapDAO().detail(vo2.getId(),"user",a));
 
+int a = Integer.parseInt(request.getParameter("no"));
+MemberVO vo2 = (MemberVO)session.getAttribute("memlogin");
+request.setAttribute("data",  new ReviewDAO().detail(a));
+session.setAttribute("no", request.getParameter("no"));
+session.setAttribute("cate", "user");
+if(vo2 != null){
+request.setAttribute("scrapdate", new ScrapDAO().detail(vo2.getId(),"user",a));
 
-	request.setAttribute("commnetdata", new ComentDAO().list("user",a));
-	
+}
+request.setAttribute("commnetdata", new ComentDAO().list("user",a));
 %>
 <jsp:forward page="../../view/template.jsp"></jsp:forward>

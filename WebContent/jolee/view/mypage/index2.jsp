@@ -21,7 +21,7 @@ request.setCharacterEncoding("euc-kr");
 			<td><a href="detail.jsp?no=${vo.no }">${vo.title }</a></td>
 			 <td>${vo.regdate}</td> 
 			<td>${vo.answer }</td>
-			<td><a href="delete.jsp?no==${vo.no }">삭제</a></td>
+			<td><a href="delete.jsp?no=${vo.no}">삭제</a></td>
 		</tr>
 	</c:forEach>
 

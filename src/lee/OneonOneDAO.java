@@ -7,6 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 import movie.ReviewVO;
 
@@ -19,20 +24,27 @@ public class OneonOneDAO {
 	ResultSet rs = null;
 	String sql = null;
 	
-	public OneonOneDAO() {
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection(
-					"jdbc:oracle:thin:@"+url, id, pw );
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	 public OneonOneDAO() {
+	        // TODO Auto-generated constructor stub
+	        
+	        try {
+	            Context init=new InitialContext();
+	            Context env = (Context)init.lookup("java:/comp/env");
+	            DataSource ds = (DataSource)env.lookup("jdbc/OracleDB");
+	            con = ds.getConnection();
+	        
+	            
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+	        
+	    }
 	
 	public ArrayList<OneonOneVO> list(String id){
 		ArrayList<OneonOneVO> res =new ArrayList<>();
 		try {
+					
 			sql = "select * from OneonOne where id=? order by regdate desc";
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, id);
@@ -56,6 +68,34 @@ public class OneonOneDAO {
 		return res;
 	}
 	
+	public ArrayList<OneonOneVO> everylist(){
+		ArrayList<OneonOneVO> res =new ArrayList<>();
+		try {
+			sql = "select * from OneonOne where answer=0 order by regdate desc";
+			stmt = con.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next())
+			{
+				OneonOneVO vo = new OneonOneVO();
+				vo.setId(rs.getString("id"));
+				vo.setNo(rs.getInt("no"));
+				vo.setTitle(rs.getString("title"));
+				vo.setContent(rs.getString("content"));	
+				vo.setAnswer(rs.getInt("answer"));
+				vo.setRegdate(rs.getDate("regdate"));			
+				res.add(vo);
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return res;
+	}
+	
+		
+	
 	public void insert(OneonOneVO mem){
 		try {
 			sql = "select max(no)+1 from OneonOne";
@@ -71,8 +111,8 @@ public class OneonOneDAO {
 			stmt.setString(2, mem.getTitle());
 			stmt.setString(3, mem.getContent());
 			stmt.setInt(4, mem.getAnswer());
-			stmt.setString(5, "superpower");
-		//	stmt.setString(5, mem.getId());
+			stmt.setString(5, mem.getId());
+			stmt.executeUpdate();
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -80,6 +120,25 @@ public class OneonOneDAO {
 		}finally {
 			close();
 		}
+	}
+	public boolean cmtup(int no){
+		boolean res = false;
+		try {
+			
+			sql = "update oneonone set answer=1 where no=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, no);
+			
+			if(stmt.executeUpdate()>0)
+				res = true;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return res;
 	}
 	
 	public boolean delete(int no)
@@ -155,7 +214,32 @@ public class OneonOneDAO {
 			close();
 		}return res;
 	}
-	
+	public OneonOneVO detail3(String id,int no){
+		OneonOneVO res =null;
+		try {
+			sql = "select * from OneonOne where id = ? and no = ?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1,id);
+			stmt.setInt(2,no);
+			
+			rs = stmt.executeQuery();
+			if(rs.next()){
+				res = new OneonOneVO();
+				
+				res.setNo(rs.getInt("no"));
+				res.setTitle(rs.getString("title"));
+				res.setContent(rs.getString("content"));
+				res.setRegdate(rs.getTimestamp("regDate"));
+				res.setAnswer(rs.getInt("answer"));
+				res.setId(rs.getString("id"));
+			}	
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}return res;
+	}
 	
 	
 	public void close()

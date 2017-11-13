@@ -1,3 +1,4 @@
+<%@page import="lee.movieDAO"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="lee.movieVO"%>
@@ -5,48 +6,31 @@
     pageEncoding="EUC-KR"%>
 <%@ include file="../../inc/menuData.jsp" %>
 <%
-	
-	String upfile = request.getRealPath("file");
-	upfile = "C:\\file";
-	MultipartRequest mm = new MultipartRequest(
-			request,
-			upfile,
-			10*1024*1024,
-			"euc-kr",
-			new DefaultFileRenamePolicy()
-			);
-	
 	request.setCharacterEncoding("euc-kr");
 	
+String[] arraygenre = request.getParameterValues("genre");
+
+String genre = "";
+
+for (int i = 0; i < arraygenre.length; i++) {
+	genre += arraygenre[i];
+	if (i < arraygenre.length - 1)
+		genre += "/";
+}
 	
 	movieVO mem = new movieVO();
-	
-	mem.setTitle(mm.getParameter("title"));
-	mem.setContent(mm.getParameter("content"));
-	mem.setSysfile(mm.getFilesystemName("file"));
-	mem.setOrifile(mm.getOriginalFileName("file"));
-	mem.setReldate(mm.getParameter("gender"));
-	mem.setClosedate(mm.getParameter("nick"));
-	
-	/* String msg = "";
-	String url = "modifyForm.jsp?no="+mem.getNo();
-	
-	if(!mem.getPw().equals(null))
-	{
-		msg = "비밀번호를 입력하세요.";
-		
-	} else if(!mem.getPw().equals("pw"))
-	{
-		msg = "잘못된 비밀번호입니다.";
-		
-	}else if(new MemberDAO().modify(mem))
-	{
-		msg = "수정 되었습니다";
-		url = "detail.jsp?id="+mem.getId();
+	mem.setNo(Integer.parseInt(request.getParameter("no")));
+	mem.setTitle(request.getParameter("title"));
+	mem.setContent(request.getParameter("content"));
+	mem.setReldate(request.getParameter("reldate"));
+	mem.setClosedate(request.getParameter("closedate"));
+	mem.setGenre(genre);
+	String msg = "수정에 실패하였습니다.";
+	if(new movieDAO().modify(mem)){
+		 msg="수정되었습니다.";
 	}
 	
-	request.setAttribute("msg", msg);
-	request.setAttribute("url", url); */
+	request.setAttribute("msg",msg);
 	
 	%>     
 

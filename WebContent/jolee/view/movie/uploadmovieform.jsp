@@ -30,7 +30,11 @@
 			<td>장르</td>
 			<td><input type="checkbox" name="genre" value="action"/>액션
 			<input type="checkbox" name="genre" value="horror"/> 공포
-			<input type="checkbox" name="genre" value="romance" />로맨스</td>
+			<input type="checkbox" name="genre" value="romance" />로맨스
+			<input type="checkbox" name="genre" value="sf" />SF
+			<input type="checkbox" name="genre" value="fantasy" />판타지
+			<input type="checkbox" name="genre" value="docu" />다큐멘터리
+		</td>
 		</tr>
 		<tr>
 			<td>파일</td>

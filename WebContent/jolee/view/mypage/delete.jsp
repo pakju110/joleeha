@@ -8,8 +8,8 @@
 </head>
 <body>
 <script type="text/javascript">
-	alert('삭제완료');
-	location.href = 'index2.jsp';
+	alert('삭제되었습니다!');
+	location.href = '../../movie/first/index.jsp';
 </script>
 </body>
 </html>

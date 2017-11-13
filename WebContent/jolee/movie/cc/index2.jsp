@@ -6,7 +6,6 @@
 <%@ include file="../../inc/menuData.jsp" %>
 <%
    
-
 	request.setAttribute("data", new movieDAO().recommendlist());
 
 %>

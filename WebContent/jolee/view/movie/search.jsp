@@ -15,6 +15,9 @@
 <td><input type="checkbox" name="genre" value="Action">액션</td>
 <td><input type="checkbox" name="genre" value="Horror">공포</td>
 <td><input type="checkbox" name="genre" value="Romance">로맨스</td>
+<td><input type="checkbox" name="genre" value="sf">SF</td>
+<td><input type="checkbox" name="genre" value="fantasy">판타지</td>
+<td><input type="checkbox" name="genre" value="docu">다큐멘터리</td>
 <td><input type="button" onclick="search()" value="검색"></td>
 </tr> 
 </table>
@@ -27,7 +30,9 @@
 		<td>개봉일</td>
 		<td>종료일</td>
 		<td>작성일</td>
+		<c:if test="${memlogin!=null &&memlogin.grade =='admin' }">
 		<td>삭제</td>
+		</c:if>
 	</tr>
 
 <c:forEach items="${data }" var="vo">
@@ -38,15 +43,12 @@
 		<td>${vo.reldate } </td>
 		<td>${vo.closedate } </td>
 		<td>${vo.regdate } </td>
+		<c:if test="${memlogin!=null &&memlogin.grade =='admin' }">
 		<td><a href="delete.jsp?no=${vo.no }">삭제</a></td>
-		
+		</c:if>
 	</tr>
 </c:forEach>
-
-	<tr >
-		<td colspan="7" align="center" >
-			<a href="uploadmovieform.jsp">글쓰기</a>
-		</td>
-	</tr>
 </table>
-
+<c:if test="${memlogin!=null &&memlogin.grade =='admin' }">
+<div align="center"><a href="uploadmovieform.jsp">글쓰기</a></div>
+</c:if>

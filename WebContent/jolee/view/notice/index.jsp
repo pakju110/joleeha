@@ -33,4 +33,11 @@
 		</td>
 	</tr>
 </c:if>
+<c:if test="${res!=null &&res.grade==admin&&a=='event'}">
+<tr>
+		<td colspan="3" align="right">
+			<a href="writeForm.jsp">이벤트 작성</a>
+		</td>
+	</tr>
+</c:if>
 </table>

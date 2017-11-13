@@ -8,7 +8,7 @@
 <%
 	
 	String upfile = request.getRealPath("file");
-	upfile = "C:\\file";
+	upfile = "C:\\projwork\\joleeha\\WebContent\\jolee\\file";
 	MultipartRequest mm = new MultipartRequest(
 			request,
 			upfile,
@@ -22,6 +22,7 @@
 	
 	String email = mm.getParameter("email1")+
 			"@"+request.getParameter("email2");
+	
 	
 	MemberVO mem = new MemberVO();
 	
@@ -44,7 +45,7 @@
 	{
 		msg = "비밀번호를 입력하세요.";
 		
-	} else if(!mem.getPw().equals(request.getParameter("pw")))
+	} else if(!mem.getPw().equals(mm.getParameter("pw")))
 	{
 		msg = "잘못된 비밀번호입니다.";
 		

@@ -14,9 +14,9 @@
 		<td>star</td>
 		<td>id</td>
 	</tr>
-<c:forEach items="${data }" var="vo">
+<c:forEach items="${data }" var="vo"  varStatus="no">
 	<tr>
-		<td>${vo.no }</td>
+		<td>${no.index+1 }</td>
 		<td>
 		<a
 			href="detail.jsp?no=${vo.no }">${vo.title}
@@ -35,7 +35,7 @@
 	</tr>
 </c:forEach>
 </table>
-<c:if test="${res!=null }&&(${res.grade==pro}||${res.grade==admin }||(${res.grade==user }&&${a==user})">
+<c:if test="${res!=null && (res.grade=='pro'||res.grade=='admin'||res.grade=='user'||a=='user')}">
 <a href="writForm.jsp">±Û¾²±â</a>
 </c:if>
 	<%-- <%if(res != null && ((res.getGrade().equals("pro") || res.getGrade().equals("admin"))||

@@ -10,7 +10,7 @@
 
 
 	String upfile = request.getRealPath("file");
-	upfile = "C:\\file";
+	upfile = "C:\\projwork\\joleeha\\WebContent\\jolee\\file";
 	MultipartRequest mm = new MultipartRequest(
 			request,
 			upfile,
@@ -19,15 +19,6 @@
 			new DefaultFileRenamePolicy()
 			);
 	request.setCharacterEncoding("euc-kr");
-	/* String id = request.getParameter("id");
-	String msg = "id가 중복되지 않습니다.";
-	String url = "idCheck.jsp?id="+id;
-	
-	 if(new MemberDAO().equals(id)) 
-	{
-		msg = "아이디가 중복됩니다.";
-		
-	}   */
 	
 	String email = mm.getParameter("email1")+
 			"@"+mm.getParameter("email2");
@@ -41,16 +32,16 @@
 	mem.setNick(mm.getParameter("nick"));
 	mem.setPhone(mm.getParameter("phone"));
 	mem.setGenre(mm.getParameter("genre"));
-	mem.setGrade("pro");
+	mem.setGrade("waiter");
 	mem.setSysfile(mm.getFilesystemName("file"));
 	mem.setOrifile(mm.getOriginalFileName("file"));
-	
+	mem.setEmail(email);
 
 	MemberDAO dao = new MemberDAO();
 	String msg = "";
-	String url = "joinForm.jsp?id="+mem.getId();
+	String url = "projoinForm.jsp?id="+mem.getId();
 	
-	if(!mem.getPw().equals(request.getParameter("pwc"))){
+	if(!mem.getPw().equals(mm.getParameter("pw"))){
 		msg = "비밀번호가 일치하지 않거나 입력되지 않았습니다.";
 	}
 	else //if(new MemberDAO().insert(mem))
@@ -58,7 +49,7 @@
 		
 		dao.insert(mem);
 		msg = "회원가입이 완료되었습니다.";
-		url = "joinDetail.jsp?id="+mem.getId();
+		url = "../../notice/first/index.jsp";
 	
 	}	
 	// 비밀번호 같은 것으로 입력해도 안들어감 

@@ -4,11 +4,11 @@ import java.io.File;
 
 public class MFile {
 
-	void fileDelete(MemberVO mem )
+	void fileDelete(String k )
 	{
-		if(mem.sysfile!=null && !mem.sysfile.equals("")&& !mem.sysfile.equals("null"))
+		if(k!=null && !k.equals("")&& !k.equals("null"))
 		{
-			File ff = new File(mem.path+"\\"+mem.sysfile);
+			File ff = new File("C:\\projwork\\joleeha\\WebContent\\jolee\\file\\"+k);
 			ff.delete();
 		}
 	}

@@ -3,7 +3,9 @@
     pageEncoding="EUC-KR"%>
 <%@ include file="../../inc/menuData.jsp" %>
 <%
-	request.setAttribute("data",  new MemberDAO().detail(request.getParameter("id")));
+
+MemberVO vo = (MemberVO)session.getAttribute("memlogin");
+request.setAttribute("data",  new MemberDAO().detail(vo.getId()));
 
 %>
-<jsp:forward page="../../view/template.jsp"></jsp:forward>.jsp"></jsp:forward>
+<jsp:forward page="../../view/template.jsp"></jsp:forward>

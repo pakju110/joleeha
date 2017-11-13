@@ -12,8 +12,6 @@
 <%
 request.setCharacterEncoding("euc-kr");
 %>
-${res.grade==admin}<br>
-${res!=null }<br>
 
 <c:if test="${a=='first'}">
 <c:set value="전체 영화의 정보를 알려드립니다." var="b"/>
@@ -29,9 +27,14 @@ ${b }
 <form action="search.jsp" name="searchgenre">
 <table>
 <tr>
+<tr>
 <td><input type="checkbox" name="genre" value="Action">액션</td>
 <td><input type="checkbox" name="genre" value="Horror">공포</td>
 <td><input type="checkbox" name="genre" value="Romance">로맨스</td>
+<td><input type="checkbox" name="genre" value="sf">SF</td>
+<td><input type="checkbox" name="genre" value="fantasy">판타지</td>
+<td><input type="checkbox" name="genre" value="docu">다큐멘터리</td>
+
 <td><input type="button" onclick="search()" value="검색"></td>
 </tr> 
 </table>

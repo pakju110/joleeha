@@ -7,13 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="upload1on1reg.jsp" method="post" enctype="multipart/form-data">
-<table border="1">
+<form action="upload1on1reg.jsp" method="post">
+	<table border="1">
 		<tr>
 			<td>제목</td>
 			<td><input type="text" name="title" /></td>
 		</tr>
-
 		<tr>
 			<td>문의사항</td>
 			<td><input type="text" name="content" /></td>

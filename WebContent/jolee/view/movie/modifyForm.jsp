@@ -21,52 +21,48 @@
 </style>
 </head>
 <body>
-<form action="modifyReg.jsp" method="post" enctype="multipart/form-data" name="frm">
+<form action="modifyReg.jsp" method="post" >
 	<table border="">
-	<tr>
-		<td>title</td><td>${vo.title }</td>
-	</tr>
-	<tr>
-		<td>줄거리</td><td>${vo.content }</td>
-	</tr>
-	<tr>
-		<td>사진</td><td><img src="../../file/${vo.sysfile }" width="500"></td>
-	</tr>
-	<tr>
-	<td>포스터 다운로드</td><td><a href="download.jsp?Sysfile=${vo.sysfile }&Orifile=${vo.orfile }" >${vo.orifile }</a></td>
-	</tr>
-	<tr>
-		<td>개봉일</td><td>${vo.reldate }</td>
-	</tr>
-	<tr>
-		<td>종료일</td><td>${vo.closedate }</td>
-	</tr>
-	<tr>
-		<td>등록일</td><td>${vo.regdate }</td>
-	</tr>
 	
-<c:choose>
-		<c:when test="${c=='cc' }">
-	<tr>	
-		<td colspan="2" align="right">
-			<a href="index2.jsp">목록</a>
+	
+		<tr>
+			<td>게시번호</td>
+			<td><input type="text" name="no" 
+			value="${param.no }" readonly="readonly" /></td>
+		</tr>
+		<tr>
+		<td>title</td>
+		<td><input type="text" name="title" value="${vo.title }" /></td>
+		
+	</tr>
+	<tr>
+		<td>줄거리</td><td><input type="text" name="content" value="${vo.content }" /></td>
+	</tr>
+	<tr>
+		<td>장르</td>
+			<td><input type="checkbox" name="genre" value="action"/>액션
+			<input type="checkbox" name="genre" value="horror"/> 공포
+			<input type="checkbox" name="genre" value="romance" />로맨스
+			<input type="checkbox" name="genre" value="sf" />SF
+			<input type="checkbox" name="genre" value="fantasy" />판타지
+			<input type="checkbox" name="genre" value="docu" />다큐멘터리
 		</td>
 	</tr>
-</c:when>
-		<c:otherwise>
-	<tr>	
-		<td colspan="2" align="right">
+	<tr>
+		<td>개봉일</td><td><input type="text" name="reldate" value="${vo.reldate }" /></td>
+	</tr>
+	<tr>
+		<td>종료일</td><td><input type="text" name="closedate" value="${vo.closedate }" /></td>
+	</tr>
+	<tr>
+		<td>등록일</td><td><input type="text" name="regdate" value="${vo.regdate }" readonly="readonly" /></td>
+	</tr>
 
-			<a href="index.jsp">목록</a>
-		</td>
-	</tr>
-		</c:otherwise>
-	</c:choose>		
 	<tr>
 			<td colspan="2" align="center">
 				<input type="submit" value="수정"  class="sch" />
 				<input type="reset" value="초기화" class="sch"/>
-				<a href="detail.jsp?id=${vo.no }">뒤로</a>
+				<a href="detail.jsp?no=${param.no }">뒤로</a>
 			</td>
 		</tr>
 	</table>

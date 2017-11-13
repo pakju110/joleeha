@@ -7,6 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 
 
 public class ComentDAO {
@@ -20,18 +24,22 @@ public class ComentDAO {
 	ResultSet rs = null;
 	String sql = null;
 
-	public ComentDAO() {
-		// TODO Auto-generated constructor stub
-
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@" + url, id, pw);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
+	 public ComentDAO() {
+	        // TODO Auto-generated constructor stub
+	        
+	        try {
+	            Context init=new InitialContext();
+	            Context env = (Context)init.lookup("java:/comp/env");
+	            DataSource ds = (DataSource)env.lookup("jdbc/OracleDB");
+	            con = ds.getConnection();
+	        
+	            
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+	        
+	    }
 
 	public ArrayList<ComentVO> list(String cate,int no) {
 		ArrayList<ComentVO> res = new ArrayList<>();

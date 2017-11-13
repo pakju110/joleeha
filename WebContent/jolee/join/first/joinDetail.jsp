@@ -1,11 +1,10 @@
-
 <%@page import="req1.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-center/notice/list
 <%@ include file="../../inc/menuData.jsp" %>
 <%
-	request.setAttribute("data",  new MemberDAO().detail(request.getParameter("id")));
+	MemberVO vo = (MemberVO)session.getAttribute("memlogin");
+	request.setAttribute("data",  new MemberDAO().detail(vo.getId()));
 
 %>
 <jsp:forward page="../../view/template.jsp"></jsp:forward>

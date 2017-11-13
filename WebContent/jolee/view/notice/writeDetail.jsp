@@ -28,7 +28,7 @@
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td><img src="../../file/${vo.sysfile}">${vo.content}</td>
+			<td><img src="../../file/${vo.sysfile}"/>${vo.content}</td>
 		</tr>
 		<tr>
 			<td colspan="2"><a href="delete.jsp?no=${vo.no}">삭제</a></td>

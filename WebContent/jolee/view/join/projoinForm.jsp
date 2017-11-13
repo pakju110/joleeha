@@ -4,8 +4,6 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
 <c:set value="${param.id}" var="id"/>
-<c:set value="" var="id"/>
-
 
 <c:if test="${id!=null }">
 	<c:set value="${param.id }" var="id"/>
@@ -25,7 +23,7 @@
 <script type="text/javascript">
    function idCheck() {
 	  
-	   jf.action="idReg.jsp";
+	   jf.action="proIdReg.jsp";
 	   jf.submit();
     }
 </script>
@@ -35,7 +33,11 @@
 	<table border=1>
 		<tr>
 			<td>아이디</td>
-			<td><input type="text" name="id" size="10" maxlength="8" value="${id }"/>
+			<td>
+			<c:choose>
+				<c:when test="${id !=null}"><input type="text" name="id" id="id" size="10" maxlength="8" value="${id}"/></c:when>
+				<c:otherwise><input type="text" name="id" id="id" size="10" maxlength="8" /></c:otherwise>
+			</c:choose>
 			<input type="button" onclick="idCheck()"  name="sch" class="sch" value="id중복확인"/>
 			</td>
 		</tr>

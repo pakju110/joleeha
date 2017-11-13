@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import lee.PicFile;
 import req1.NoticeVO;
 
 public class NoticeDAO {
@@ -141,25 +142,33 @@ public class NoticeDAO {
 	}
 	
 	public boolean delete(int no)
-	{
-		boolean res = false;
-		try {
-			
-			sql = "delete from movienotice where no=?"; 
-			stmt = con.prepareStatement(sql);
-			stmt.setInt(1, no);
-			
-			if(stmt.executeUpdate()>0) 
-				res=true;
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			close();
-		}
-		return res;
-	}
-	
+	   {
+	      boolean res = false;
+	      String k = null;
+	      try {
+	         
+	         sql = "select* from movienotice where no=?"; 
+	         stmt = con.prepareStatement(sql);
+	         stmt.setInt(1, no);
+	         rs = stmt.executeQuery();
+	         
+	         if(rs.next()) {
+	             k = (rs.getString("sysfile"));
+	         }
+	         sql = "delete from movienotice where no=?"; 
+	         stmt = con.prepareStatement(sql);
+	         stmt.setInt(1, no);   
+	         
+	         if(stmt.executeUpdate()>0) 
+	            res=true;
+	         new PicFile().fileDelete(k);
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }finally {
+	         close();
+	      }
+	      return res;
+	   }
 	
 	
 	public boolean modify(NoticeVO vo )

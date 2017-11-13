@@ -7,6 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+
 import file_p1.PicFile;
 import req.MemberVO;
 
@@ -21,18 +26,22 @@ public class ReviewDAO {
 	ResultSet rs = null;
 	String sql = null;
 
-	public ReviewDAO() {
-		// TODO Auto-generated constructor stub
-
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@" + url, id, pw);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
+	 public ReviewDAO() {
+	        // TODO Auto-generated constructor stub
+	        
+	        try {
+	            Context init=new InitialContext();
+	            Context env = (Context)init.lookup("java:/comp/env");
+	            DataSource ds = (DataSource)env.lookup("jdbc/OracleDB");
+	            con = ds.getConnection();
+	        
+	            
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+	        
+	    }
 
 	public ArrayList<ReviewVO> list(String cate) {
 		ArrayList<ReviewVO> res = new ArrayList<>();
@@ -65,7 +74,68 @@ public class ReviewDAO {
 
 		return res;
 	}
+	public ArrayList<ReviewVO> historylist(String id) {
+		ArrayList<ReviewVO> res = new ArrayList<>();
 
+		try {
+			sql = "select * from moviereview where id = ? order by regdate desc";
+
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, id);
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				ReviewVO vo = new ReviewVO();
+				vo.setCate(rs.getString("cate"));
+				vo.setNo(rs.getInt("no"));
+				vo.setTitle(rs.getString("title"));
+				vo.setId(rs.getString("id"));
+				vo.setStar(rs.getDouble("star"));
+				vo.setMovietitle(rs.getString("movietitle"));
+				vo.setRegDate(rs.getTimestamp("regdate"));
+				res.add(vo);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+		return res;
+	}
+	public ArrayList<ReviewVO> scraplist(String id) {
+		ArrayList<ReviewVO> res = new ArrayList<>();
+
+		try {
+			sql = "select * from moviereview s, moviescrap c where s.cate = c.cate and s.no = c.no and c.id = ? order by s.regdate desc";
+
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, id);
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				ReviewVO vo = new ReviewVO();
+				vo.setCate(rs.getString("cate"));
+				vo.setNo(rs.getInt("no"));
+				vo.setTitle(rs.getString("title"));
+				vo.setId(rs.getString("id"));
+				vo.setStar(rs.getDouble("star"));
+				vo.setMovietitle(rs.getString("movietitle"));
+				vo.setRegDate(rs.getTimestamp("regdate"));
+				res.add(vo);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+		return res;
+	}
 	public ReviewVO detail(int no) {
 		ReviewVO res = null;
 
@@ -80,7 +150,7 @@ public class ReviewDAO {
 			if (rs.next()) {
 				res = new ReviewVO();
 
-				res.setRegDate(rs.getTimestamp("regdate"));
+				//res.setRegDate(rs.getTimestamp("regdate"));
 				res.setCate(rs.getString("cate"));
 				res.setNo(rs.getInt("no"));
 				res.setTitle(rs.getString("title"));
@@ -142,26 +212,35 @@ public class ReviewDAO {
 			close();
 		}
 	}
-	public boolean delete(int no )
-	{
-		boolean res = false;
-		try {
-			
-			sql = "delete from moviereview where no= ?" ;
+	   public boolean delete(int no )
+	   {
+	      boolean res = false;
+	      String k = null;
+	      try {
+	         
+	         sql = "delete from moviereview where no= ?" ;
 
-			stmt = con.prepareStatement(sql);
-			// stmt.setString(1, res.getCate());
-			stmt.setInt(1, no);
-			rs = stmt.executeQuery();
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			close();
-		}
-		return res;
-	}
+	         stmt = con.prepareStatement(sql);
+	         stmt.setInt(1, no);
+	         rs = stmt.executeQuery();
+	         
+	         if(rs.next()) {
+	             k = (rs.getString("sysfile"));
+	         }
+	         sql = "delete from moviereview where no=?"; 
+	         stmt = con.prepareStatement(sql);
+	         stmt.setInt(1, no);
+	         if(stmt.executeUpdate()>0) 
+	            res=true;
+	         new lee.PicFile().fileDelete(k);
+	      } catch (Exception e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }finally {
+	         close();
+	      }
+	      return res;
+	   }
 	
 	public void close() {
 		try {

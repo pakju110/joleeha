@@ -12,7 +12,7 @@
 
 
 	String upfile = request.getRealPath("file");
-	upfile = "C:\\file";
+upfile = "C:\\projwork\\joleeha\\WebContent\\jolee\\file";
 	MultipartRequest mm = new MultipartRequest(
 			request,
 			upfile,
